@@ -43,6 +43,10 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: require('@/views/Login')
+    }, {
+      path: '/setting',
+      name: 'Setting',
+      component: require('@/views/Setting')
     }
   ]
 })

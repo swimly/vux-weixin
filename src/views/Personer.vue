@@ -8,7 +8,7 @@
         </li>
         <li class="col v-t t-r col-8">
           <p>
-            <a href="" class="iconfont icon-shezhi"></a>
+            <router-link to="/setting" class="iconfont icon-shezhi"></router-link>
           </p>
         </li>
       </ul>

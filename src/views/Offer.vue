@@ -1,12 +1,12 @@
 <template>
   <div class="safe-list">
     <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index">
-        <span class="col v-m">
+        <span class="col v-m col-8 t-c ptb-10">
           <span class="img">
             <x-img :src="item.cover" alt=""></x-img>
           </span>
         </span>
-        <span class="col v-m">
+        <span class="col v-m col-16">
           <b class="name">{{item.name}}</b>
           <i>承保地区：{{item.address}}</i>
           <i>承保车辆：{{item.car}}</i>

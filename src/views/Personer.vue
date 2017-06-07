@@ -44,10 +44,10 @@
           <span class="iconfont icon-yitongguodedingdan"></span>
           <b>已出单</b>
         </a>
-        <a href="#" class="col v-m">
+        <router-link to="/order" class="col v-m">
           <span class="iconfont icon-dingdan"></span>
           <b>我的订单</b>
-        </a>
+        </router-link>
       </div>
     </div>
     <div>
@@ -56,11 +56,11 @@
         <span class="col v-m">我的钱包</span>
         <span class="col v-m iconfont icon-right t-r"></span>
       </a>
-      <a href="#" class="row w block-link">
+      <router-link to="/exchange" class="row w block-link">
         <span class="col v-m iconfont icon-exchange c-blue"></span>
         <span class="col v-m">兑换记录</span>
         <span class="col v-m iconfont icon-right t-r"></span>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>

@@ -47,6 +47,14 @@ const router = new Router({
       path: '/setting',
       name: 'Setting',
       component: require('@/views/Setting')
+    }, {
+      path: '/exchange',
+      name: 'exchange',
+      component: require('@/views/Exchange')
+    }, {
+      path: '/order',
+      name: 'order',
+      component: require('@/views/Order')
     }
   ]
 })

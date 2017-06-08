@@ -2,7 +2,7 @@
   <div>
     <div class="order-item mt-5" v-for="(item, index) in list" :key="index">
       <ul class="row w white status">
-        <li class="col v-m time col-14">2017-05-02  17 : 50 : 15</li>
+        <li class="col v-m time col-14">{{item.time}}</li>
         <li class="col v-m t-r col-10">待保险公司报价</li>
       </ul>
       <a class="row w good">

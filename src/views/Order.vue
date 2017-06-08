@@ -1,26 +1,48 @@
 <template>
   <div class="page gray auto has-tab">
     <tab :line-width=2 active-color='#EB3D00' v-model="index">
-      <tab-item class="vux-center" :selected="demo === item" v-for="(item, index) in bar" @click="demo = item" :key="index">{{item}}</tab-item>
+      <tab-item class="vux-center" :selected="current === item.text" v-for="(item, index) in bar" @on-item-click="handleChange(item, index)" :key="index">{{item.text}}</tab-item>
     </tab>
-    <swiper v-model="index" :show-dots="false" class="h" height="500px">
-      <swiper-item v-for="(item, index) in bar" :key="index" class="h">
+    <swiper v-model="index" :show-dots="false" class="h" :height="height" @on-index-change="handleSwiper">
+      <swiper-item v-for="(item, index) in bar" :key="index" class="h auto">
         <div class="tab-swiper vux-center h">
-          <order-item :list="list"></order-item>
+          <Scroller lock-x :height="height" use-pulldown use-pullup bounce :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
+            <order-item :list="list"></order-item>
+          </Scroller>
         </div>
       </swiper-item>
     </swiper>
   </div>
 </template>
 <script>
-  import {Tab, TabItem, Swiper, SwiperItem, Sticky} from 'vux'
+  import {Tab, TabItem, Swiper, SwiperItem, Sticky, Scroller} from 'vux'
   import OrderItem from '@/components/OrderItem'
   import {mapGetters} from 'vuex'
   export default {
     data () {
       return {
-        bar: ['全部', '待报价', '待付款', '待出单', '已出单'],
-        demo: '全部',
+        pulldownConfig: {},
+        pullupConfig: {
+          content: '下拉刷新'
+        },
+        height: '0px',
+        bar: [{
+          text: '全部',
+          key: 'all'
+        }, {
+          text: '待报价',
+          key: 'waitingoffer'
+        }, {
+          text: '待付款',
+          key: 'waitingpay'
+        }, {
+          text: '待出单',
+          key: 'waitinglist'
+        }, {
+          text: '已出单',
+          key: 'list'
+        }],
+        current: '全部',
         index: 0,
         getBarWidth: function (index) {
           console.log(index)
@@ -29,7 +51,8 @@
       }
     },
     mounted () {
-      document.querySelector('.vux-slider').clientHeight
+      console.log(document.querySelector('.vux-slider').clientHeight)
+      this.height = document.querySelector('.vux-slider').clientHeight + 'px'
     },
     computed: {
       ...mapGetters({
@@ -42,7 +65,16 @@
       Swiper,
       SwiperItem,
       Sticky,
-      OrderItem
+      OrderItem,
+      Scroller
+    },
+    methods: {
+      handleChange (item, index) {
+        this.index = index
+      },
+      handleSwiper (index) {
+        console.log(this.bar[index])
+      }
     }
   }
 </script>

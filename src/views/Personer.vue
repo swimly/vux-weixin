@@ -51,11 +51,11 @@
       </div>
     </div>
     <div>
-      <a href="#" class="row w block-link">
+      <router-link to="/wallet" class="row w block-link">
         <span class="col v-m iconfont icon-wallet c-yellow"></span>
         <span class="col v-m">我的钱包</span>
         <span class="col v-m iconfont icon-right t-r"></span>
-      </a>
+      </router-link>
       <router-link to="/exchange" class="row w block-link">
         <span class="col v-m iconfont icon-exchange c-blue"></span>
         <span class="col v-m">兑换记录</span>

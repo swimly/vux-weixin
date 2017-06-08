@@ -28,24 +28,24 @@
     <div class="mt-5 white sub-line top-line mb-5">
       <div class="row w order">
         <a href="#" class="col v-m">
-          <span class="iconfont icon-offer"></span>
+          <span class="iconfont"><x-img :src="'static/img/order1.png'"></x-img></span>
           <b>待报价</b>
         </a>
         <a href="#" class="col v-m">
-          <span class="iconfont icon-wodeqianbao"></span>
+          <span class="iconfont"><x-img :src="'static/img/order2.png'"></x-img></span>
           <b>待付款</b>
           <i class="num">2</i>
         </a>
         <a href="#" class="col v-m">
-          <span class="iconfont icon-waiting"></span>
+          <span class="iconfont"><x-img :src="'static/img/order3.png'"></x-img></span>
           <b>待出单</b>
         </a>
         <a href="#" class="col v-m">
-          <span class="iconfont icon-yitongguodedingdan"></span>
+          <span class="iconfont"><x-img :src="'static/img/order4.png'"></x-img></span>
           <b>已出单</b>
         </a>
         <router-link to="/order" class="col v-m">
-          <span class="iconfont icon-dingdan"></span>
+          <span class="iconfont"><x-img :src="'static/img/order5.png'"></x-img></span>
           <b>我的订单</b>
         </router-link>
       </div>
@@ -65,7 +65,7 @@
   </div>
 </template>
 <script>
-  import {Blur} from 'vux'
+  import {Blur, XImg} from 'vux'
   export default {
     data () {
       return {
@@ -73,7 +73,8 @@
       }
     },
     components: {
-      Blur
+      Blur,
+      XImg
     }
   }
 </script>

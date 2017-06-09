@@ -95,6 +95,26 @@ const router = new Router({
       path: '/information',
       name: 'information',
       component: require('@/views/Information')
+    }, {
+      path: '/edit/passwordBypay',
+      name: 'passwordBypay',
+      component: require('@/views/PasswordPay')
+    }, {
+      path: '/edit/passwordBylogin',
+      name: 'passwordBylogin',
+      component: require('@/views/PasswordLogin')
+    }, {
+      path: '/aboutUs',
+      name: 'aboutUs',
+      component: require('@/views/AboutUs')
+    }, {
+      path: '/feedback',
+      name: 'feedback',
+      component: require('@/views/FeedBack')
+    }, {
+      path: '/question',
+      name: 'question',
+      component: require('@/views/Question')
     }
   ]
 })

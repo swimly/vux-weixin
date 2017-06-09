@@ -67,6 +67,34 @@ const router = new Router({
       path: '/record',
       name: 'record',
       component: require('@/views/Record')
+    }, {
+      path: '/record/:id',
+      name: 'recordDetail',
+      component: require('@/views/RecordDetail')
+    }, {
+      path: '/cash',
+      name: 'cash',
+      component: require('@/views/Cash')
+    }, {
+      path: '/donation',
+      name: 'donation',
+      component: require('@/views/Donation')
+    }, {
+      path: '/detail',
+      name: 'detail',
+      component: require('@/views/Detail')
+    }, {
+      path: '/balanceDetail',
+      name: 'balanceDetail',
+      component: require('@/views/BalanceDetail')
+    }, {
+      path: '/message',
+      name: 'message',
+      component: require('@/views/Message')
+    }, {
+      path: '/information',
+      name: 'information',
+      component: require('@/views/Information')
     }
   ]
 })

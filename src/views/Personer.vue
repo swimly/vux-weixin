@@ -8,7 +8,8 @@
         </li>
         <li class="col v-t t-r col-8">
           <p>
-            <router-link to="/setting" class="iconfont icon-shezhi"></router-link>
+            <router-link to="/setting" class="iconfont icon-shezhi v-m"></router-link>
+            <router-link to="/message" class="iconfont icon-xiaoxi v-m" style="margin-left:0.5rem;"></router-link>
           </p>
         </li>
       </ul>

@@ -1,14 +1,14 @@
 <template>
-  <ul class="row w">
-    <li class="col v-m col-12 t-c">
+  <div class="row w">
+    <router-link to="/detail" class="col v-m col-12 t-c">
       <h2 class="num">23000</h2>
       <p class="text">累计积分收入（分）</p>
-    </li>
-    <li class="col v-m col-12 t-c">
+    </router-link>
+    <router-link to="/balanceDetail" class="col v-m col-12 t-c">
       <h2 class="num">1587</h2>
       <p class="text">积分余额（分）</p>
-    </li>
-  </ul>
+    </router-link>
+  </div>
 </template>
 <style scoped>
 .default .num{color:#444;font-size:1.6rem;}

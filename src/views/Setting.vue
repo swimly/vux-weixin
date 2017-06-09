@@ -1,7 +1,7 @@
 <template>
   <div class="page gray">
     <group class="mt0">
-      <cell title="我的资料" link="/infomation"></cell>
+      <cell title="我的资料" link="/information"></cell>
       <cell title="修改支付密码" link="edit/passwordBypay"></cell>
       <cell title="修改登录密码" link="edit/passwordBylogin"></cell>
       <cell title="更换绑定手机" link="edit/phone" value="18827078587"></cell>

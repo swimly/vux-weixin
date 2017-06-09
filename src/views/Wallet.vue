@@ -26,8 +26,8 @@
     </div>
     <div class="btn-area row w" style="border:none;">
       <div class="col v-m">
-        <x-button type="warn">立即提现</x-button>
-        <x-button plain type="primary" class="custom-primary-red" style="margin-top:10px;">积分转增</x-button>
+        <x-button type="warn" @click.native="jump('/cash')">立即提现</x-button>
+        <x-button plain type="primary" class="custom-primary-red" style="margin-top:10px;" @click.native="jump('/donation')">积分转增</x-button>
       </div>
     </div>
   </div>
@@ -76,6 +76,9 @@
     methods: {
       onReady (instance) {
         this.loading = !this.loading
+      },
+      jump (url) {
+        this.$router.push(url)
       }
     }
   }

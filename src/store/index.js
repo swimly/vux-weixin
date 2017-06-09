@@ -5,6 +5,7 @@ import offer from './module/offer'
 import mall from './module/mall'
 import exchange from './module/exchange'
 import order from './module/order'
+import wallet from './module/wallet'
 Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     offer,
     mall,
     exchange,
-    order
+    order,
+    wallet
   }
 })

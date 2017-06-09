@@ -56,9 +56,17 @@ const router = new Router({
       name: 'order',
       component: require('@/views/Order')
     }, {
+      path: '/order/:id',
+      name: 'orders',
+      component: require('@/views/Order')
+    }, {
       path: '/wallet',
       name: 'wallet',
       component: require('@/views/Wallet')
+    }, {
+      path: '/record',
+      name: 'record',
+      component: require('@/views/Record')
     }
   ]
 })

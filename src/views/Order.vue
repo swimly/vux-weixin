@@ -6,7 +6,7 @@
     <swiper v-model="index" :show-dots="false" class="h" :height="height" @on-index-change="handleSwiper">
       <swiper-item v-for="(item, index) in bar" :key="index" class="h auto">
         <div class="tab-swiper vux-center h">
-          <Scroller lock-x :height="height" use-pulldown use-pullup bounce :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
+          <Scroller lock-x :height="height" bounce>
             <order-item :list="list"></order-item>
           </Scroller>
         </div>
@@ -53,6 +53,10 @@
     mounted () {
       console.log(document.querySelector('.vux-slider').clientHeight)
       this.height = document.querySelector('.vux-slider').clientHeight + 'px'
+    },
+    created () {
+      console.log(this.$route.params.id)
+      this.index = parseInt(this.$route.params.id)
     },
     computed: {
       ...mapGetters({

@@ -18,9 +18,9 @@
         </li>
       </ul>
     </div>
-    <div class="grid t-c white mt-5 click top-line sub-line">
-      <router-link :to="item.url" class="col col-6 p-1" v-for="(item, index) in nav" :key="index">
-        <x-img :src="item.icon" alt=""></x-img>
+    <div class="grid t-c white mt-5 click top-line sub-line quick">
+      <router-link :to="item.url" class="col col-6" v-for="(item, index) in nav" :key="index">
+        <x-img class="icon" :src="item.icon" alt=""></x-img>
         <b class="block fs-1 c-n">{{item.text}}</b>
       </router-link>
     </div>
@@ -74,3 +74,8 @@
     }
   }
 </script>
+<style scoped>
+.icon{width:3rem;}
+.quick{padding:0.5rem 0;}
+.quick a{padding:0.5rem 0;line-height:2;}
+</style>

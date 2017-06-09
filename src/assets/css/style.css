@@ -132,7 +132,7 @@ img{border:none;vertical-align: top;}
 .order .col:active{background-color:rgba(0,0,0,0.1);}
 .order .col:last-child{border-left:1px solid #EEE;width:25%;}
 .block-link .col{padding:10px 15px;}
-.block-link{border-bottom:1px solid #E9E9E9;font-size:1rem;color:#444;background:#fff;}
+.block-link{border-bottom:1px solid #E9E9E9;font-size:1.2rem;color:#444;background:#fff;}
 .block-link .col:first-child{width:20%;text-align:center;font-size:1.6rem;}
 .block-link:first-child{border-top:1px solid #E9E9E9;}
 .block-link:active{background-color:rgba(0,0,0,0.1);}

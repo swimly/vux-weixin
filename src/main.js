@@ -5,16 +5,19 @@ import FastClick from 'fastclick'
 import App from './App'
 import router from './router'
 import store from './store'
-import {WechatPlugin, AjaxPlugin, LoadingPlugin, ToastPlugin} from 'vux'
+import {WechatPlugin, LoadingPlugin, ToastPlugin} from 'vux'
 import VueLazyload from 'vue-lazyload'
 import VueHead from 'vue-head'
+import VueResource from 'vue-resource'
+import VueJsonp from 'vue-jsonp'
 Vue.use(LoadingPlugin)
 
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
+Vue.use(VueJsonp, 5000)
 Vue.use(WechatPlugin)
-Vue.use(AjaxPlugin)
+Vue.use(VueResource)
 Vue.use(VueHead)
 Vue.use(ToastPlugin)
 Vue.use(VueLazyload, {

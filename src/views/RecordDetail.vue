@@ -20,6 +20,11 @@
 <script>
   import {Scroller, Group, Cell} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '提现记录详情'
+      }
+    },
     components: {
       Scroller,
       Group,

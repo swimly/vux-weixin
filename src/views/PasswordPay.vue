@@ -24,6 +24,15 @@
     </div>
   </div>
 </template>
+<script>
+  export default {
+    head: {
+      title: {
+        inner: '修改支付密码'
+      }
+    }
+  }
+</script>
 <style scoped>
 .form.has-btn .btn{padding:0.7rem 0;}
 </style>

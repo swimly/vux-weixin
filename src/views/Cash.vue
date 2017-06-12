@@ -28,6 +28,11 @@
 <script>
   import {XInput, Group, Cell, Scroller, XButton} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '提现'
+      }
+    },
     components: {
       XInput,
       Group,

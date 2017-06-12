@@ -33,29 +33,41 @@ const state = {
     url: '/mall/new'
   }],
   newProduct: [{
+    id: 1,
     cover: 'static/img/g1.png',
     name: '卡儿酷 车载吸尘器 干湿两用多功能',
-    score: 1980
+    score: 1980,
+    time: '2016-12-23'
   }, {
+    id: 2,
     cover: 'static/img/g2.png',
     name: '香百年（Carori） 汽车香水座车载车用香水',
-    score: 890
+    score: 890,
+    time: '2016-12-23'
   }, {
+    id: 3,
     cover: 'static/img/g1.png',
     name: '卡儿酷 车载吸尘器 干湿两用多功能',
-    score: 1980
+    score: 1980,
+    time: '2016-12-23'
   }, {
+    id: 4,
     cover: 'static/img/g2.png',
     name: '香百年（Carori） 汽车香水座车载车用香水',
-    score: 890
+    score: 890,
+    time: '2016-12-23'
   }, {
+    id: 5,
     cover: 'static/img/g1.png',
     name: '卡儿酷 车载吸尘器 干湿两用多功能',
-    score: 1980
+    score: 1980,
+    time: '2016-12-23'
   }, {
+    id: 6,
     cover: 'static/img/g2.png',
     name: '香百年（Carori） 汽车香水座车载车用香水',
-    score: 890
+    score: 890,
+    time: '2016-12-23'
   }]
 }
 const getters = {

@@ -28,6 +28,11 @@
   import {mapGetters} from 'vuex'
   import {XImg} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '兑换记录'
+      }
+    },
     components: {
       XImg
     },

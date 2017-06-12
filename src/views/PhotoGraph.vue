@@ -63,6 +63,13 @@
   export default {
     components: {
       XButton
+    },
+    methods: {
+      handleSubmit () {
+        const id = this.$route.params.id
+        console.log(id)
+        this.$router.push('/offer/select/' + id)
+      }
     }
   }
 </script>

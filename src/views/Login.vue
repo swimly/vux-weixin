@@ -3,16 +3,22 @@
     <div class="col v-m t-c">
       <img src="static/img/logo.png" alt="" class="logo">
       <div class="form-panel">
-        <div class="form w icon-left"><input type="text" placeholder="请输入手机号" v-model="form.phone" @blur="handleCheckPhone"><span class="iconfont icon-shouji"></span></div>
-        <div class="form w icon-left"><input type="text" placeholder="请输入密码" v-model="form.password"><span class="iconfont icon-mima"></span></div>
-        <x-button type="warn" @click.native="handleSubmit" :show-loading="loading">登录</x-button>  <!--show-loading-->
+        <group gutter="10px">
+          <x-input placeholder="请输入手机号码" is-type="china-mobile" required></x-input>
+        </group>
+        <group gutter="10px">
+          <x-input placeholder="请输入密码" required></x-input>
+        </group>
+        <group gutter="10px">
+          <x-button type="warn" @click.native="handleSubmit" :show-loading="loading">登录</x-button>  <!--show-loading-->
+        </group>
       </div>
       <ul class="row w devision">
         <li class="col v-m item t-r">
-          <button class="link c-n">立即注册</button>
+          <router-link to="/register" class="link c-n">立即注册</router-link>
         </li>
         <li class="col v-m item t-l">
-          <button class="link c-n">忘记密码？{{pageLoading}}</button>
+          <router-link to="password" class="link c-n">忘记密码？</router-link>
         </li>
       </ul>
     </div>
@@ -20,7 +26,7 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-  import {XButton} from 'vux'
+  import {XButton, Group, Cell, XInput} from 'vux'
   export default {
     data () {
       return {
@@ -40,7 +46,10 @@
       })
     },
     components: {
-      XButton
+      XButton,
+      Group,
+      Cell,
+      XInput
     },
     methods: {
       handleSubmit () {

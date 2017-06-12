@@ -17,6 +17,11 @@
 <script>
   import {Group, Cell} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '设置'
+      }
+    },
     components: {
       Group,
       Cell

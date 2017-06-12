@@ -44,6 +44,11 @@
 <script>
   import {XInput, Group, Datetime, XButton, Cell} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '我的资料'
+      }
+    },
     data () {
       return {
         form: {

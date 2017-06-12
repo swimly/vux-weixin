@@ -28,6 +28,11 @@
 <script>
   import {Group, Cell, XInput, XButton, Scroller} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '积分转赠'
+      }
+    },
     components: {
       Group,
       Cell,

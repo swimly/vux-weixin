@@ -2,7 +2,7 @@
   <div class="page gray has-footer">
     <div class="content">
       <div class="cover w">
-        <x-img class="w" :src="offer.banner" alt=""></x-img>
+        <img style="height:25vh" class="w" v-lazy="offer.banner" alt=""/>
       </div>
       <div class="form w line ion-right white sub-line">
         <x-address title="投保城市" v-model="city" raw-value :list="addressData"></x-address>
@@ -48,8 +48,8 @@
     },
     methods: {
       handleSubmit () {
-        console.log(this.$route.path)
-        this.$router.push(this.$route.path + '/photograph')
+        const id = this.$route.params.id
+        this.$router.push('/offer/photograph/' + id)
       }
     }
   }

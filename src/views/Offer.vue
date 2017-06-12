@@ -5,7 +5,7 @@
         <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index">
             <span class="col v-m col-8 t-c ptb-10">
               <span class="img">
-                <x-img :src="item.cover" alt=""></x-img>
+                <img v-lazy="item.cover" alt=""/>
               </span>
             </span>
             <span class="col v-m col-16">
@@ -19,15 +19,26 @@
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
-import {XImg, Scroller} from 'vux'
+import {mapGetters, mapMutations} from 'vuex'
+import {XImg, Scroller, Loading} from 'vux'
 export default {
+  head: {
+    title: {
+      inner: '车险报价'
+    }
+  },
   components: {
     XImg,
-    Scroller
+    Scroller,
+    Loading
   },
   mounted () {
     this.height = document.querySelector('.content').clientHeight + 'px'
+  },
+  methods: {
+    ...mapMutations({
+      showLoading: 'updateLoadingStatus'
+    })
   },
   data () {
     return {

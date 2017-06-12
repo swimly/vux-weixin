@@ -2,43 +2,43 @@
   <div class="page gray">
     <swiper class="w" :aspect-ratio="315/712" dots-position="center" auto>
       <swiper-item class="swiper-demo-img" v-for="(item, index) in recommend" :key="index">
-        <x-img class="w" :src="item"></x-img>
+        <img class="w" v-lazy="item"/>
       </swiper-item>
     </swiper>
     <div class="p-1 white sub-line">
-      <ul class="row w d-line fs-1">
-        <li class="col v-m t-c">
-          <x-img class="v-m" :src="'static/img/score.png'" alt=""></x-img>
+      <div class="row w d-line fs-1">
+        <router-link to="/detail" class="col v-m t-c c-6">
+          <img class="v-m" v-lazy="'static/img/score.png'" alt=""/>
           <span class="v-m">积分：</span>
           <span class="c-red v-m">1342</span>
-        </li>
-        <li class="col v-m t-c">
-          <x-img class="v-m " :src="'static/img/jilu.png'" alt=""></x-img>
+        </router-link>
+        <router-link to="/exchange" class="col v-m t-c c-6">
+          <img class="v-m " v-lazy="'static/img/jilu.png'" alt=""/>
           <span class="v-m">兑换记录</span>
-        </li>
-      </ul>
+        </router-link>
+      </div>
     </div>
     <div class="grid t-c white mt-5 click top-line sub-line quick">
       <router-link :to="item.url" class="col col-6" v-for="(item, index) in nav" :key="index">
-        <x-img class="icon" :src="item.icon" alt=""></x-img>
+        <img class="icon" v-lazy="item.icon" alt=""/>
         <b class="block fs-1 c-n">{{item.text}}</b>
       </router-link>
     </div>
     <swiper class="w" :aspect-ratio="83/360" dots-position="center" auto>
       <swiper-item class="swiper-demo-img" v-for="(item, index) in advert" :key="index">
-        <img class="w" :src="item">
+        <img class="w" v-lazy="item">
       </swiper-item>
     </swiper>
     <h2 class="title">新品推荐</h2>
     <ul class="grid goods-list">
       <li class="col col-12" v-for="(item, index) in news">
-        <a href="#" class="goods">
+        <router-link :to="'/goods/' + item.id" class="goods">
           <span class="cover">
-            <x-img :src="item.cover"></x-img>
+            <img v-lazy="item.cover"/>
           </span>
           <b class="name">{{item.name}}</b>
           <span class="c-red">积分<b class="score">{{item.score}}</b></span>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -47,17 +47,22 @@
   import {Swiper, SwiperItem, XImg} from 'vux'
   import {mapGetters} from 'vuex'
   export default {
+    head: {
+      title: {
+        inner: '积分商城'
+      }
+    },
     data () {
       return {
         recommend: [
           'static/img/banner1.png',
-          'http://placeholder.qiniudn.com/712x315/F74C31/ffffff',
-          'http://placeholder.qiniudn.com/712x315/8AEEB1/ffffff'
+          'static/img/banner1.png',
+          'static/img/banner1.png'
         ],
         advert: [
           'static/img/banner2.png',
-          'http://placeholder.qiniudn.com/360x83/F74C31/ffffff',
-          'http://placeholder.qiniudn.com/360x83/8AEEB1/ffffff'
+          'static/img/banner2.png',
+          'static/img/banner2.png'
         ]
       }
     },

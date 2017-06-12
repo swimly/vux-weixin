@@ -5,6 +5,7 @@ h1,h2,h3,h4,h5,h6,b{font-weight:normal;margin:0;}
 *{box-sizing:border-box;}
 a{-webkit-tap-highlight-color:transparent;text-decoration: none;}
 .page{height:100%;overflow:hidden;width:100%;}
+.c-6{color:#666;}
 .page.box{display:-webkit-box;}
 .page.box .content{-webkit-box-flex:1;}
 .page.has-footer{padding-bottom:8rem;}

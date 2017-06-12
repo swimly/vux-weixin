@@ -1,7 +1,7 @@
 <template>
   <div class="page gray">
     <Scroller :height="height" lock-x>
-      <cell is-link class="score-list" v-for="(item, index) in list" :link="'/record/' + item.id">
+      <cell is-link class="score-list" v-for="(item, index) in list" :key="index" :link="'/record/' + item.id">
         <li class="row w">
           <span class="col v-m col-11 t-l">
             <b class="price">-{{item.score}}元</b>
@@ -32,6 +32,11 @@
   import {mapGetters} from 'vuex'
   import {Scroller, Cell} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '提现记录'
+      }
+    },
     data () {
       return {
         height: '0px'

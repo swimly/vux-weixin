@@ -37,6 +37,11 @@
   import ScoreItem from '@/components/ScoreItem'
   import {XButton} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '我的钱包'
+      }
+    },
     components: {
       IEcharts,
       ScoreItem,

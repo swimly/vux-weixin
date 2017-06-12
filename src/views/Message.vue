@@ -1,7 +1,7 @@
 <template>
   <div class="page gray">
     <group gutter="0px">
-      <cell value-align="left" v-for="(item, index) in list">
+      <cell value-align="left" v-for="(item, index) in list" :key="index">
         <h2 class="time">{{item.time}}</h2>
         <p class="text">{{item.title}}<badge v-if="!item.read"></badge></p>
       </cell>

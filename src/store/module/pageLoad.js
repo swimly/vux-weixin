@@ -9,7 +9,6 @@ const getters = {
 const mutations = {
   updateLoadingStatus (state, param) {
     state.isLoading = param
-    console.log('我被执行了')
   }
 }
 export default {

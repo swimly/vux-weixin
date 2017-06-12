@@ -19,6 +19,11 @@
   import OrderItem from '@/components/OrderItem'
   import {mapGetters} from 'vuex'
   export default {
+    head: {
+      title: {
+        inner: '我的订单'
+      }
+    },
     data () {
       return {
         pulldownConfig: {},
@@ -31,16 +36,16 @@
           key: 'all'
         }, {
           text: '待报价',
-          key: 'waitingoffer'
+          key: 'price'
         }, {
           text: '待付款',
-          key: 'waitingpay'
+          key: 'pay'
         }, {
           text: '待出单',
-          key: 'waitinglist'
+          key: 'issue'
         }, {
           text: '已出单',
-          key: 'list'
+          key: 'issued'
         }],
         current: '全部',
         index: 0,
@@ -56,7 +61,12 @@
     },
     created () {
       console.log(this.$route.params.id)
-      this.index = parseInt(this.$route.params.id)
+      for (const i in this.bar) {
+        if (this.bar[i].key === this.$route.params.id) {
+          this.index = parseInt(i)
+        }
+      }
+      // this.index = this.$route.params.id
     },
     computed: {
       ...mapGetters({
@@ -75,9 +85,11 @@
     methods: {
       handleChange (item, index) {
         this.index = index
+        this.$router.push(this.bar[this.index].key)
       },
       handleSwiper (index) {
         console.log(this.bar[index])
+        this.$router.push(this.bar[index].key)
       }
     }
   }

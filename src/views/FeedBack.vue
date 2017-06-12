@@ -14,6 +14,11 @@
 <script>
   import {Group, Cell, XInput, XTextarea, XButton} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '意见反馈'
+      }
+    },
     components: {
       Group,
       Cell,

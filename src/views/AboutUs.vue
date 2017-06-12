@@ -20,6 +20,11 @@
 <script>
   import {Group, Cell} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '关于我们'
+      }
+    },
     components: {
       Group,
       Cell

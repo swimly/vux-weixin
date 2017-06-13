@@ -14,6 +14,12 @@ const getters = {
   }
 }
 const mutations = {
+  // 用户退出登录
+  postLogout (state, This) {
+    This.$localStorage.remove('userInfo')
+    This.$localStorage.set('logined', false)
+    This.$router.replace('/login')
+  },
   // 用户登录操作
   postLogin (state, This) {
     if (This.form.tel === '' || This.form.pwd === '') {
@@ -60,8 +66,8 @@ const mutations = {
             state.logined = true
             state.userInfo = res.body.data.userInfo
             This.$localStorage.set('userInfo', JSON.stringify(state.userInfo))
+            This.$localStorage.set('time', Date.parse(new Date()))
             setTimeout(() => {
-              console.log(This.$router)
               This.$router.replace('/')
             }, 1000)
           } else {
@@ -94,6 +100,10 @@ const mutations = {
         })
       }
     }
+  },
+  // 从localstorage获取用户登录信息
+  getAuthorInfo (state, This) {
+    state.userInfo = JSON.parse(This.$localStorage.get('userInfo'))
   }
 }
 export default {

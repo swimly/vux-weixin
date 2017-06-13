@@ -6,16 +6,26 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import {Loading} from 'vux'
 export default {
   name: 'app',
   components: {
     Loading
   },
+  created () {
+    this.getAuthorInfo(this) // 获取用户登录信息
+    console.log(this.user)
+  },
   computed: {
     ...mapGetters({
-      pageLoading: 'pageLoading'
+      pageLoading: 'pageLoading',
+      user: 'getUserInfo'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      getAuthorInfo: 'getAuthorInfo'
     })
   }
 }

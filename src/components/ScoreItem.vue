@@ -1,15 +1,25 @@
 <template>
   <div class="row w">
     <router-link to="/detail" class="col v-m col-12 t-c">
-      <h2 class="num">23000</h2>
+      <h2 class="num">{{data.userCumulative || 0}}</h2>
       <p class="text">累计积分收入（分）</p>
     </router-link>
     <router-link to="/balanceDetail" class="col v-m col-12 t-c">
-      <h2 class="num">1587</h2>
+      <h2 class="num">{{data.userBalance || 0}}</h2>
       <p class="text">积分余额（分）</p>
     </router-link>
   </div>
 </template>
+<script>
+  export default {
+    props: {
+      data: {
+        type: Object,
+        default: {}
+      }
+    }
+  }
+</script>
 <style scoped>
 .default .num{color:#444;font-size:1.6rem;}
 .default .text{color:#999;text-indent:1rem;}

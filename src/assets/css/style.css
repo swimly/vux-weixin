@@ -78,7 +78,7 @@ img{border:none;vertical-align: top;}
 .tips .iconfont{width:3rem;text-align:center;font-size:2rem;}
 .tips.icon{padding:0.5rem 0.3rem;}
 /*积分商城*/
-.page.has-nav{padding-bottom:4rem;}
+.page.has-nav{padding-bottom:55px;}
 .page.has-head{padding-top:12rem;}
 .has-head .head-bar{margin-top:-12rem;}
 .page .content{height:100%;overflow:auto;overflow-x:hidden;}

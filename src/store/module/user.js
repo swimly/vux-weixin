@@ -1,4 +1,4 @@
-import {login} from '../../config'
+import {login, sms, register} from '../../config'
 const state = {
   logined: false,
   userInfo: {}
@@ -98,6 +98,134 @@ const mutations = {
           text: '正在努力加载中，不要着急哦！',
           time: '1000'
         })
+      }
+    }
+  },
+  postRegister (state, This) {
+    if (!This.form.tel || !This.$refs.tel.valid) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '20em',
+        position: 'bottom',
+        text: '请填写正确的手机号码！',
+        time: '1000'
+      })
+    } else if (!This.form.name) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '10em',
+        position: 'bottom',
+        text: '请填写您的姓名',
+        time: '1000'
+      })
+    } else if (!This.$refs.pwd.valid || This.pwd !== This.form.pwd) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '10em',
+        position: 'bottom',
+        text: '密码输入有误！',
+        time: '1000'
+      })
+    } else if (!This.form.captcha) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '10em',
+        position: 'bottom',
+        text: '验证码必填！',
+        time: '1000'
+      })
+    } else {
+      // 提交注册
+      if (!This.loading) {
+        This.$http({
+          method: 'jsonp',
+          url: register,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: This.form,
+          before: () => {
+            This.loading = true
+          }
+        })
+        .then(res => {
+          console.log(res)
+          This.loading = false
+          if (res) {
+            This.$vux.toast.show({
+              type: 'text',
+              width: '10em',
+              position: 'bottom',
+              text: res.body.msg,
+              time: '1000'
+            })
+          }
+        })
+      } else {
+        This.$vux.toast.show({
+          type: 'text',
+          width: '10em',
+          position: 'bottom',
+          text: '正在提交注册！',
+          time: '1000'
+        })
+      }
+    }
+  },
+  postSMS (state, This) {
+    if (!This.form.tel) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '20em',
+        position: 'bottom',
+        text: '请填写手机号码！',
+        time: '1000'
+      })
+    } else {
+      if (!This.$refs.tel.valid) {
+        This.$vux.toast.show({
+          type: 'text',
+          width: '20em',
+          position: 'bottom',
+          text: '请填写正确的手机号码',
+          time: '1000'
+        })
+      } else {
+        if (!This.getting) {
+          This.$http({
+            method: 'jsonp',
+            url: sms,
+            jsonp: 'callback',
+            jsonpCallback: 'json',
+            params: {
+              tel: This.form.tel,
+              type: 2
+            },
+            before: () => {
+              This.getting = true
+              console.log(sms)
+            }
+          })
+          .then(res => {
+            This.$vux.toast.show({
+              type: 'text',
+              width: '20em',
+              position: 'bottom',
+              text: '验证码获取成功！',
+              time: '1000'
+            })
+            This.getting = false
+            This.show = true
+            This.start = true
+          })
+        } else {
+          This.$vux.toast.show({
+            type: 'text',
+            width: '20em',
+            position: 'bottom',
+            text: '正在获取验证码，请稍后！',
+            time: '1000'
+          })
+        }
       }
     }
   },

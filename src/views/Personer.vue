@@ -53,6 +53,7 @@
       </cell>
     </group>
     <group gutter="10px">
+      {{userInfo}}
       <x-button @click.native="logout = true" plain type='primary' style="border-left:none;border-right:none;border-radius:0;border-color:#ccc;color:#EB3D00;">注销/登录</x-button>
     </group>
     <confirm v-model="logout" @on-confirm="handleLogout">
@@ -63,6 +64,7 @@
 <script>
   import {Blur, XImg, Group, Cell, XButton, Confirm} from 'vux'
   import ScoreItem from '@/components/ScoreItem'
+  import {mapGetters} from 'vuex'
   export default {
     head: {
       title: {
@@ -74,6 +76,11 @@
         face: 'static/img/face.jpg',
         logout: false
       }
+    },
+    computed: {
+      ...mapGetters({
+        userInfo: 'getUserInfo'
+      })
     },
     components: {
       Blur,

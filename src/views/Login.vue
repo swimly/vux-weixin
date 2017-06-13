@@ -1,7 +1,7 @@
 <template>
   <div class="page row gray login">
     <div class="col v-m t-c">
-      <!--<img src="static/img/logo.png" alt="" class="logo">-->
+      <img src="static/img/logo.webp" alt="" class="logo">
       <div class="form-panel login">
         <group gutter="10px">
           <x-input placeholder="请输入手机号码" v-model="form.tel" ref="tel" is-type="china-mobile" required @on-blur="handleCheckPhone">
@@ -36,13 +36,13 @@
       return {
         loading: false,
         form: {
-          tel: '13037192473',
-          pwd: '12345678'
+          tel: '18827078587',
+          pwd: '122514'
         }
       }
     },
     created () {
-      console.log(this.$wechat)
+      // console.log(this.$wechat)
       console.log(dateFormat(645116400000))
     },
     computed: {
@@ -61,26 +61,7 @@
         postLogin: 'postLogin'
       }),
       handleSubmit () {
-        if (this.form.tel === '' || this.form.pwd === '') {
-          this.$vux.toast.show({
-            type: 'text',
-            width: '20em',
-            position: 'top',
-            text: '手机号码和密码不能为空！',
-            time: '1000'
-          })
-        } else if (!this.$refs.tel.valid) {
-          this.$vux.toast.show({
-            type: 'text',
-            width: '20em',
-            position: 'top',
-            text: '手机号格式不正确',
-            time: '1000'
-          })
-        } else {
-          this.postLogin(this)
-          // this.$router.push('/')
-        }
+        this.postLogin(this)
       },
       handleCheckPhone () {
         if (!this.$refs.tel.valid) {

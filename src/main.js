@@ -10,6 +10,9 @@ import VueLazyload from 'vue-lazyload'
 import VueHead from 'vue-head'
 import VueResource from 'vue-resource'
 import VueJsonp from 'vue-jsonp'
+import VueLocalStorage from 'vue-localstorage'
+
+Vue.use(VueLocalStorage)
 Vue.use(LoadingPlugin)
 
 FastClick.attach(document.body)

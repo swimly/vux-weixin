@@ -1,4 +1,4 @@
-import {login, sms, register} from '../../config'
+import {login, sms, register, editPwd} from '../../config'
 const state = {
   logined: false,
   userInfo: {}
@@ -14,11 +14,84 @@ const getters = {
   }
 }
 const mutations = {
+  // 修改用户密码
+  postEditPassword (state, This) {
+    console.log(This.form)
+    if (!This.form.tel) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '20em',
+        position: 'bottom',
+        text: '请填写手机号码！',
+        time: '1000'
+      })
+    } else if (!This.form.captcha) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '20em',
+        position: 'bottom',
+        text: '验证码必须填写！',
+        time: '1000'
+      })
+    } else if (!This.form.pwd || !This.pwd) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '10em',
+        position: 'bottom',
+        text: '请输入新密码！',
+        time: '1000'
+      })
+    } else if (This.form.pwd !== This.pwd) {
+      This.$vux.toast.show({
+        type: 'text',
+        width: '15em',
+        position: 'bottom',
+        text: '两次输入的密码不同！',
+        time: '1000'
+      })
+    } else {
+      // 上面全部通过，执行修改密码操作
+      if (This.loading) {
+        This.$vux.toast.show({
+          type: 'text',
+          width: '10em',
+          position: 'bottom',
+          text: '请勿重复提交！',
+          time: '1000'
+        })
+      } else {
+        This.$http({
+          method: 'jsonp',
+          url: editPwd,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: This.form,
+          before: () => {
+            This.loading = true
+          }
+        })
+        .then(res => {
+          console.log(res)
+          This.loading = false
+          This.$vux.toast.show({
+            type: 'text',
+            width: '15em',
+            position: 'bottom',
+            text: res.body.msg,
+            time: '1000'
+          })
+          This.$router.replace('/login')
+        })
+      }
+    }
+  },
   // 用户退出登录
   postLogout (state, This) {
     This.$localStorage.remove('userInfo')
     This.$localStorage.set('logined', false)
     This.$router.replace('/login')
+    state.logined = false
+    state.userInfo = {}
   },
   // 用户登录操作
   postLogin (state, This) {
@@ -54,6 +127,7 @@ const mutations = {
           }
         })
         .then(res => {
+          console.log(res)
           if (res.body.data) {
             This.loading = false
             This.$vux.toast.show({
@@ -101,6 +175,7 @@ const mutations = {
       }
     }
   },
+  // 用户注册
   postRegister (state, This) {
     if (!This.form.tel || !This.$refs.tel.valid) {
       This.$vux.toast.show({
@@ -158,6 +233,13 @@ const mutations = {
               text: res.body.msg,
               time: '1000'
             })
+            state.logined = true
+            state.userInfo = res.body.data.userInfo
+            This.$localStorage.set('userInfo', JSON.stringify(state.userInfo))
+            This.$localStorage.set('time', Date.parse(new Date()))
+            setTimeout(() => {
+              This.$router.replace('/')
+            }, 1000)
           }
         })
       } else {
@@ -171,6 +253,7 @@ const mutations = {
       }
     }
   },
+  // 发送短信接口
   postSMS (state, This) {
     if (!This.form.tel) {
       This.$vux.toast.show({
@@ -198,7 +281,7 @@ const mutations = {
             jsonpCallback: 'json',
             params: {
               tel: This.form.tel,
-              type: 2
+              type: This.smsType
             },
             before: () => {
               This.getting = true
@@ -206,16 +289,22 @@ const mutations = {
             }
           })
           .then(res => {
+            console.log(res)
+            if (res.body.status) {
+              This.getting = false
+              This.show = true
+              This.start = true
+            } else {
+              This.getting = false
+              This.isReg = true
+            }
             This.$vux.toast.show({
               type: 'text',
               width: '20em',
               position: 'bottom',
-              text: '验证码获取成功！',
-              time: '1000'
+              text: res.body.msg,
+              time: '3000'
             })
-            This.getting = false
-            This.show = true
-            This.start = true
           })
         } else {
           This.$vux.toast.show({

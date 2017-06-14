@@ -1,6 +1,7 @@
 <template>
   <div class="page row gray login">
     <div class="col v-t t-c form-panel">
+      <p class="tips" v-if="isReg">该号码已经注册，请前往<router-link to="/login">登录</router-link></p>
       <group gutter="0px">
         <x-input placeholder="请输入真实手机号" v-model="form.tel" is-type="china-mobile" ref="tel">
           <span class="iconfont icon-shouji" slot="label"></span>
@@ -44,11 +45,13 @@
   export default {
     data () {
       return {
+        isReg: false,
         loading: false, // 注册按钮显示加载
         getting: false, // 获取验证码显示加载
         show: false, // 倒计时
         start: false,
         time: time,
+        smsType: 2,
         text: '发送验证码',
         pwd: '122514',
         form: {
@@ -123,4 +126,8 @@
 .form-panel .weui-cell__ft{position:absolute;right:0;top:50%;transform:translate(0,-50%);}
 .weui-btn.code .weui-loading{position:absolute;left:0.5rem;top:50%;margin-top:-10px !important;}
 .weui-btn.code.weui-btn_loading{padding-left:2rem !important;}
+</style>
+<style scoped>
+.tips{padding:0.5rem;}
+.tips a{color:#F8B918;padding:0 0.5rem;text-decoration:underline;}
 </style>

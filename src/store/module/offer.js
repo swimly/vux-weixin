@@ -12,8 +12,8 @@ const state = {
   },
   offer: {
     id: 1,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner3.png',
+    cover: 'static/img/safe1.webp',
+    banner: 'static/img/banner3.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
@@ -21,48 +21,48 @@ const state = {
   },
   offerList: [{
     id: 1,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe1.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
     recommend: true
   }, {
     id: 2,
-    cover: 'static/img/safe2.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe2.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
     recommend: true
   }, {
     id: 3,
-    cover: 'static/img/safe3.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe3.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
     recommend: false
   }, {
     id: 4,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe1.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
     recommend: false
   }, {
     id: 5,
-    cover: 'static/img/safe2.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe2.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',
     recommend: false
   }, {
     id: 6,
-    cover: 'static/img/safe3.png',
-    banner: 'static/img/banner1.png',
+    cover: 'static/img/safe3.webp',
+    banner: 'static/img/banner1.webp',
     name: '人保车险',
     address: '各大城市',
     car: '9座及以下个人非营业客车',

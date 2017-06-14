@@ -55,14 +55,14 @@
     data () {
       return {
         recommend: [
-          'static/img/banner1.png',
-          'static/img/banner1.png',
-          'static/img/banner1.png'
+          'static/img/banner1.webp',
+          'static/img/banner1.webp',
+          'static/img/banner1.webp'
         ],
         advert: [
-          'static/img/banner2.png',
-          'static/img/banner2.png',
-          'static/img/banner2.png'
+          'static/img/banner2.webp',
+          'static/img/banner2.webp',
+          'static/img/banner2.webp'
         ]
       }
     },

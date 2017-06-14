@@ -43,11 +43,11 @@
       return {
         id: 0,
         pay: [{
-          icon: 'static/img/alipay.png',
+          icon: 'static/img/alipay.webp',
           key: '01',
           value: '支付宝'
         }, {
-          icon: 'static/img/wechat.png',
+          icon: 'static/img/wechat.webp',
           key: '02',
           value: '微信'
         }]

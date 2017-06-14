@@ -3,7 +3,7 @@ const state = {
     id: 1,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',
@@ -15,7 +15,7 @@ const state = {
     id: 2,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',
@@ -27,7 +27,7 @@ const state = {
     id: 3,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',
@@ -39,7 +39,7 @@ const state = {
     id: 4,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',
@@ -51,7 +51,7 @@ const state = {
     id: 5,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',
@@ -63,7 +63,7 @@ const state = {
     id: 6,
     goods: {
       id: 123,
-      cover: 'static/img/safe1.webp'
+      cover: 'static/img/safe1.png'
     },
     carNumber: '鄂A78458',
     insured: '刘勇',

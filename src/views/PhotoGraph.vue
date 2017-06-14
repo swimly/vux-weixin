@@ -15,7 +15,7 @@
           </ul>
         </div>
         <div class="take-photo">
-          <img src="static/img/sfz.webp" alt="">
+          <img src="static/img/sfz.png" alt="">
           <span class="iconfont icon-add"></span>
         </div>
       </div>
@@ -33,7 +33,7 @@
           </ul>
         </div>
         <div class="take-photo">
-          <img src="static/img/jsz.webp" alt="">
+          <img src="static/img/jsz.png" alt="">
           <span class="iconfont icon-add"></span>
         </div>
         <h4 class="sub-module-title sub-line">行驶证副本照</span></h4>
@@ -46,7 +46,7 @@
           </ul>
         </div>
         <div class="take-photo">
-          <img src="static/img/jsz.webp" alt="">
+          <img src="static/img/jsz.png" alt="">
           <span class="iconfont icon-add"></span>
         </div>
       </div>

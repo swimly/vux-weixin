@@ -8,7 +8,7 @@
       <router-link :to="'/order/detail/' + item.id" class="row w good">
         <span class="col v-m col-6">
           <span class="img">
-            <img src="static/img/safe1.webp" alt="">
+            <img src="static/img/safe1.png" alt="">
           </span>
         </span>
         <span class="col v-m col-18">

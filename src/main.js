@@ -25,7 +25,7 @@ Vue.use(VueHead)
 Vue.use(ToastPlugin)
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: 'dist/error.webp',
+  error: 'dist/error.png',
   loading: 'static/img/loading.gif',
   attempt: 1
 })

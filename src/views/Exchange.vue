@@ -18,7 +18,7 @@
     </div>
     <div class="row w h" v-if="list.length === 0">
       <div class="col v-m t-c tip">
-        <x-img :src="'static/img/sorry.webp'" alt=""></x-img>
+        <x-img :src="'static/img/sorry.png'" alt=""></x-img>
         <p>没有兑换奖品记录哦！</p>
       </div>
     </div>

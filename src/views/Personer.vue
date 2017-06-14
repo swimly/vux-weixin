@@ -3,8 +3,8 @@
     <blur :blur-amount=20 :url="selectBlur()" class="head-bar">
       <ul class="row w h" style="position:relative;z-index:1;">
         <li class="col v-b col-16">
-          <img v-lazy="userInfo.userSex ? 'static/img/female.webp' : 'static/img/male.webp'" alt="" class="circle v-m" v-if="userInfo">
-          <img v-lazy="'static/img/face.webp'" alt="" class="circle v-m" v-if="!userInfo">
+          <img v-lazy="userInfo.userSex ? 'static/img/female.png' : 'static/img/male.png'" alt="" class="circle v-m" v-if="userInfo">
+          <img v-lazy="'static/img/face.png'" alt="" class="circle v-m" v-if="!userInfo">
           <span class="v-m" v-if="userInfo">{{userInfo.userName}}</span>
           <router-link to="/login" v-if="!userInfo">登录/注册</router-link>
         </li>
@@ -23,24 +23,24 @@
       <div class="mt-5 white sub-line top-line mb-5">
         <div class="row w order">
           <router-link to="/order/price" class="col v-m">
-            <span class="iconfont"><x-img :src="'static/img/order1.webp'"></x-img></span>
+            <span class="iconfont"><x-img :src="'static/img/order1.png'"></x-img></span>
             <b>待报价</b>
           </router-link>
           <router-link to="/order/pay" class="col v-m">
-            <span class="iconfont"><x-img :src="'static/img/order2.webp'"></x-img></span>
+            <span class="iconfont"><x-img :src="'static/img/order2.png'"></x-img></span>
             <b>待付款</b>
             <i class="num">2</i>
           </router-link>
           <router-link to="/order/issue" class="col v-m">
-            <span class="iconfont"><x-img :src="'static/img/order3.webp'"></x-img></span>
+            <span class="iconfont"><x-img :src="'static/img/order3.png'"></x-img></span>
             <b>待出单</b>
           </router-link>
           <router-link to="/order/issued" class="col v-m">
-            <span class="iconfont"><x-img :src="'static/img/order4.webp'"></x-img></span>
+            <span class="iconfont"><x-img :src="'static/img/order4.png'"></x-img></span>
             <b>已出单</b>
           </router-link>
           <router-link to="/order/all" class="col v-m">
-            <span class="iconfont"><x-img :src="'static/img/order5.webp'"></x-img></span>
+            <span class="iconfont"><x-img :src="'static/img/order5.png'"></x-img></span>
             <b>我的订单</b>
           </router-link>
         </div>

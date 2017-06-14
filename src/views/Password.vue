@@ -55,11 +55,11 @@
         time: time,
         smsType: 1,
         text: '发送验证码',
-        pwd: '122514',
+        pwd: '',
         form: {
-          tel: '18827078587',
-          pwd: '122514',
-          captcha: '7072'
+          tel: '',
+          pwd: '',
+          captcha: ''
         }
       }
     },

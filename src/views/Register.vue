@@ -53,12 +53,12 @@
         time: time,
         smsType: 2,
         text: '发送验证码',
-        pwd: '122514',
+        pwd: '',
         form: {
-          tel: '18827078587',
-          name: '刘勇',
-          captcha: '1116',
-          pwd: '122514'
+          tel: '',
+          name: '',
+          captcha: '',
+          pwd: ''
         }
       }
     },

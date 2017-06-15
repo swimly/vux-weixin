@@ -59,6 +59,13 @@ const router = new Router({
         }
       }
     }, {
+      path: '/offer/success/:id',
+      components: {
+        default: (resolve) => {
+          require(['@/views/OfferSuccess'], resolve)
+        }
+      }
+    }, {
       path: '/login',
       name: 'Login',
       component: (resolve) => {

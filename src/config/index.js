@@ -8,6 +8,10 @@ export const tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=clie
 export const ticketUrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
 export const appId = 'wxabf1c20c98f9cf4c'
 export const appSecret = '4e5337cb2cff85f21385ff8673e1c07a'
+export const forced = [{
+  text: '交通强险+车船税',
+  name: 'forced'
+}]
 export const basic = [
   {
     text: '车辆损失保险',
@@ -21,12 +25,12 @@ export const basic = [
   }, {
     text: '司机座位险',
     name: 'driverSeat',
-    value: ['1万/座', '1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '1万/座'],
+    value: ['1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '6万/座'],
     regardless: 1
   }, {
     text: '乘客座位险',
     name: 'passengerSeat',
-    value: ['1万/座', '1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '1万/座'],
+    value: ['1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '6万/座'],
     regardless: 1
   }, {
     text: '盗抢险',
@@ -44,15 +48,11 @@ export const additional = [
     name: 'autoignition',
     regardless: 1
   }, {
-    text: '车身划痕险',
-    name: 'scratch',
-    regardless: 1
-  }, {
     text: '涉水险',
     name: 'wading',
     regardless: 1
   }, {
-    text: '三者逃逸险',
+    text: '无法找到第三方特约险',
     name: 'escape'
   }, {
     text: '制定专修厂特约险',

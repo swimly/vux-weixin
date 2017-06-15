@@ -3,7 +3,7 @@
     <div class="checkbox circle left" slot="icon">
       <input type="checkbox" v-model="data.name">
       <span class="iconfont icon-dot"></span>
-      <label for="">{{data.name}}</label>
+      <label for="">{{data.text}}</label>
     </div>
     <div class="form select" slot="title" v-if="data.value">
       <select>

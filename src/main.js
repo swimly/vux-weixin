@@ -9,7 +9,6 @@ import {WechatPlugin, LoadingPlugin, ToastPlugin} from 'vux'
 import VueLazyload from 'vue-lazyload'
 import VueHead from 'vue-head'
 import VueResource from 'vue-resource'
-import VueJsonp from 'vue-jsonp'
 import VueLocalStorage from 'vue-localstorage'
 
 Vue.use(VueLocalStorage)
@@ -18,7 +17,6 @@ Vue.use(LoadingPlugin)
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
-Vue.use(VueJsonp, 5000)
 Vue.use(WechatPlugin)
 Vue.use(VueResource)
 Vue.use(VueHead)

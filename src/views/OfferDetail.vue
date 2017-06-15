@@ -2,14 +2,18 @@
   <div class="page gray has-footer">
     <div class="content">
       <div class="cover w">
-        <!--<img style="height:25vh" class="w" v-lazy="offer.banner" alt=""/>-->
+        <img style="height:25vh" class="w" v-lazy="'static/img/banner3.png'" alt=""/>
       </div>
-      <div class="form w line ion-right white sub-line">
-        <x-address title="投保城市" v-model="city" raw-value :list="addressData"></x-address>
-      </div>
-      <!--<div class="form w line"><input type="text" placeholder="请填写车牌号"><span class="text">车牌号码</span></div>
-      <div class="form w line"><input type="text" placeholder="请填写车主姓名"><span class="text">车主姓名</span></div>
-      <div class="form w line"><input type="text" placeholder="请填写真实手机号"><span class="text">手机号</span></div>-->
+      <selectCity title="投保城市"></selectCity>
+      <group gutter="0">
+        <x-input title="车牌号码" placeholder="请填写车牌号" placeholder-align="right" text-align="right"></x-input>
+      </group>
+      <group gutter="0">
+        <x-input title="车主姓名" placeholder="请填写车主姓名" placeholder-align="right" text-align="right"></x-input>
+      </group>
+      <group gutter="0">
+        <x-input title="手机号" placeholder="请填写真实手机号" placeholder-align="right" text-align="right"></x-input>
+      </group>
     </div>
     <div class="footer row w">
       <div class="col v-m t-c">
@@ -25,14 +29,24 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-  import {Group, XAddress, ChinaAddressV3Data, Cell, XButton, XImg} from 'vux'
+  import {Group, XAddress, ChinaAddressV3Data, Cell, XButton, XImg, XInput} from 'vux'
+  import selectCity from '@/components/SelectCity'
   export default {
+    data () {
+      return {
+        loading: false,
+        addressData: ChinaAddressV3Data,
+        city: []
+      }
+    },
     components: {
       Group,
       XAddress,
       Cell,
       XButton,
-      XImg
+      XImg,
+      selectCity,
+      XInput
     },
     created () {
     },
@@ -40,13 +54,6 @@
       ...mapGetters({
         offer: 'getOffer'
       })
-    },
-    data () {
-      return {
-        loading: false,
-        addressData: ChinaAddressV3Data,
-        city: []
-      }
     },
     methods: {
       handleSubmit () {

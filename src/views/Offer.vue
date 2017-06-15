@@ -5,7 +5,7 @@
         <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index">
             <span class="col v-m col-8 t-c ptb-10">
               <span class="img">
-                <img v-lazy="item.logo" alt=""/>
+                <img v-lazy="item.listPic" alt=""/>
               </span>
             </span>
             <span class="col v-m col-16">

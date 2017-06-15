@@ -32,9 +32,9 @@
     <h2 class="title">新品推荐</h2>
     <ul class="grid goods-list">
       <li class="col col-12" v-for="(item, index) in news">
-        <router-link :to="'/goods/' + item.id" class="goods">
+        <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveInfo">
           <span class="cover">
-            <img v-lazy="item.cover"/>
+            <img v-lazy="item.listPic"/>
           </span>
           <b class="name">{{item.name}}</b>
           <span class="c-red">积分<b class="score">{{item.score}}</b></span>
@@ -45,7 +45,7 @@
 </template>
 <script>
   import {Swiper, SwiperItem, XImg} from 'vux'
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
   export default {
     head: {
       title: {
@@ -63,13 +63,30 @@
           'static/img/banner2.png',
           'static/img/banner2.png',
           'static/img/banner2.png'
-        ]
+        ],
+        product: {
+          type: 0,
+          timeOrder: 0,
+          priceOrder: 0,
+          defaultOrder: 0,
+          limit: 8,
+          pageIndex: 0
+        }
       }
+    },
+    created () {
+      this.getNewProduct(this)
     },
     computed: {
       ...mapGetters({
         nav: 'getMallNav',
         news: 'getNewProduct'
+      })
+    },
+    methods: {
+      handleSaveInfo () {},
+      ...mapMutations({
+        getNewProduct: 'getNewProduct'
       })
     },
     components: {

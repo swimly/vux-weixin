@@ -1,3 +1,4 @@
+import {product} from '../../config'
 const state = {
   mallNav: [{
     text: '新品上市',
@@ -78,7 +79,25 @@ const getters = {
     return state.newProduct
   }
 }
+const mutations = {
+  getNewProduct (state, This) {
+    This.$http({
+      method: 'jsonp',
+      url: product,
+      jsonp: 'callback',
+      jsonpCallback: 'json',
+      params: This.product,
+      before: () => {
+      }
+    })
+    .then(res => {
+      console.log(res)
+      state.newProduct = res.body.data.productList
+    })
+  }
+}
 export default {
   state,
-  getters
+  getters,
+  mutations
 }

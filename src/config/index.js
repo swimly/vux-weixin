@@ -3,4 +3,60 @@ export const sms = 'http://liuwbox.com/zzbao/app/user/sms.htm' // 短信接口
 export const register = 'http://liuwbox.com/zzbao/app/user/regist.htm' // 注册接口
 export const editPwd = 'http://liuwbox.com/zzbao/app/user/resetPwd.htm' // 修改密码接口
 export const company = 'http://liuwbox.com/zzbao/app/insurance/company.htm' // 保险公司接口
+export const product = 'http://liuwbox.com/zzbao/app/shop/product.htm' // 保险公司接口
+export const tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential'
+export const ticketUrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
+export const appId = 'wxabf1c20c98f9cf4c'
+export const appSecret = '4e5337cb2cff85f21385ff8673e1c07a'
+export const basic = [
+  {
+    text: '车辆损失保险',
+    name: 'lossInsurance',
+    regardless: 1
+  }, {
+    text: '第三者责任保险',
+    name: 'thirdParty',
+    value: ['5万', '10万', '15万', '20万', '30万', '50万', '100万', '150万', '200万'],
+    regardless: 1
+  }, {
+    text: '司机座位险',
+    name: 'driverSeat',
+    value: ['1万/座', '1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '1万/座'],
+    regardless: 1
+  }, {
+    text: '乘客座位险',
+    name: 'passengerSeat',
+    value: ['1万/座', '1万/座', '2万/座', '3万/座', '4万/座', '5万/座', '1万/座'],
+    regardless: 1
+  }, {
+    text: '盗抢险',
+    name: 'robbery'
+  }
+]
+export const additional = [
+  {
+    text: '玻璃破碎险',
+    name: 'glassCrushing',
+    value: ['国产', '进口'],
+    regardless: 1
+  }, {
+    text: '自燃损失险',
+    name: 'autoignition',
+    regardless: 1
+  }, {
+    text: '车身划痕险',
+    name: 'scratch',
+    regardless: 1
+  }, {
+    text: '涉水险',
+    name: 'wading',
+    regardless: 1
+  }, {
+    text: '三者逃逸险',
+    name: 'escape'
+  }, {
+    text: '制定专修厂特约险',
+    name: 'appointedSpecialist'
+  }
+]
 export const time = 60 // 获取验证码时间间隔单位：秒

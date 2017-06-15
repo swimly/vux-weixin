@@ -16,7 +16,7 @@
         </div>
         <div class="take-photo">
           <img src="static/img/sfz.png" alt="">
-          <span class="iconfont icon-add"></span>
+          <span class="iconfont icon-add" @click="handleTakePhoto"></span>
         </div>
       </div>
       <h3 class="module-title">车辆信息</h3>
@@ -34,7 +34,7 @@
         </div>
         <div class="take-photo">
           <img src="static/img/jsz.png" alt="">
-          <span class="iconfont icon-add"></span>
+          <span class="iconfont icon-add" @click="handleTakePhoto"></span>
         </div>
         <h4 class="sub-module-title sub-line">行驶证副本照</span></h4>
         <div class="tips icon">
@@ -47,7 +47,7 @@
         </div>
         <div class="take-photo">
           <img src="static/img/jsz.png" alt="">
-          <span class="iconfont icon-add"></span>
+          <span class="iconfont icon-add" @click="handleTakePhoto"></span>
         </div>
       </div>
     </div>
@@ -65,6 +65,8 @@
       XButton
     },
     methods: {
+      handleTakePhoto () {
+      },
       handleSubmit () {
         const id = this.$route.params.id
         console.log(id)

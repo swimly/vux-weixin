@@ -1,28 +1,61 @@
 import {company} from '../../config'
 const state = {
   order: {
-    insurance: '', // 险种id
-    city: '', // 投保城市
-    carNumber: '', // 车牌号
-    carOwner: '', // 车主姓名
-    phone: '', // 车主电话
-    IDface: '', // 身份证正面照片
+    insuranceId: '', // 险种id
+    insuranceBanner: '', // 保险banner
+    insureArea: '', // 投保城市
+    license: '', // 车牌号
+    ownerName: '', // 车主姓名
+    ownerTel: '', // 车主电话
+    iDface: '', // 身份证正面照片
     drivingLicense: '', // 行驶证正面
     subdrivingLicense: '', // 行驶证附页
-    force: '' // 强制保险
-  },
-  offer: {
-    id: 1,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner3.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: true
+    forcedInsurance: '', // 强制保险
+    basic: [
+      {
+        lossInsurance: 1, // 车辆损失险
+        regardless: 0 // 不计免赔
+      }, {
+        thirdParty: 1, // 第三者责任险
+        value: '50万',
+        regardless: 0 // 不计免赔
+      }, {
+        driverSeat: 1, // 司机座位险
+        value: '6万/座',
+        regardless: 0 // 不计免赔
+      }, {
+        passengerSeat: 1, // 乘客座位险
+        value: '1万/座',
+        regardless: 0 // 不计免赔
+      }, {
+        robbery: 0 // 盗抢险
+      }
+    ],
+    additional: [
+      {
+        glassCrushing: 1, // 玻璃破碎险
+        value: '国产'
+      }, {
+        autoignition: 1 // 自燃损失险
+      }, {
+        scratch: 1, // 车身划痕险
+        value: '2000'
+      }, {
+        wading: 1, // 涉水险
+        value: '1万/座'
+      }, {
+        escape: 1 // 三者逃逸险
+      }, {
+        appointedSpecialist: 1 // 指定专修厂特约险
+      }
+    ]
   },
   offerList: []
 }
 const getters = {
+  getOrder (state) {
+    return state.order
+  },
   getOfferList (state) {
     return state.offerList
   },

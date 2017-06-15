@@ -1,17 +1,17 @@
 <template>
   <div class="page h">
-    <Scroller lock-x :height="height" use-pulldown use-pullup :pulldown-config="pulldown" :pullup-config="pullup" v-model="status">
+    <Scroller lock-x :height="height" v-model="status">
       <div class="safe-list">
         <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index">
             <span class="col v-m col-8 t-c ptb-10">
               <span class="img">
-                <img v-lazy="item.cover" alt=""/>
+                <img v-lazy="item.logo" alt=""/>
               </span>
             </span>
             <span class="col v-m col-16">
               <b class="name">{{item.name}}</b>
-              <i>承保地区：{{item.address}}</i>
-              <i>承保车辆：{{item.car}}</i>
+              <i>承保地区：{{item.insureArea}}</i>
+              <i>承保车辆：{{item.insureCar}}</i>
             </span>
           </router-link>
       </div>
@@ -32,12 +32,16 @@ export default {
     Scroller,
     Loading
   },
+  created () {
+    this.getOfferList(this)
+  },
   mounted () {
     this.height = document.querySelector('.content').clientHeight + 'px'
   },
   methods: {
     ...mapMutations({
-      showLoading: 'updateLoadingStatus'
+      showLoading: 'updateLoadingStatus',
+      getOfferList: 'getOfferList'
     })
   },
   data () {

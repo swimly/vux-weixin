@@ -1,3 +1,4 @@
+import {company} from '../../config'
 const state = {
   order: {
     insurance: '', // 险种id
@@ -19,55 +20,7 @@ const state = {
     car: '9座及以下个人非营业客车',
     recommend: true
   },
-  offerList: [{
-    id: 1,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: true
-  }, {
-    id: 2,
-    cover: 'static/img/safe2.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: true
-  }, {
-    id: 3,
-    cover: 'static/img/safe3.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: false
-  }, {
-    id: 4,
-    cover: 'static/img/safe1.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: false
-  }, {
-    id: 5,
-    cover: 'static/img/safe2.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: false
-  }, {
-    id: 6,
-    cover: 'static/img/safe3.png',
-    banner: 'static/img/banner1.png',
-    name: '人保车险',
-    address: '各大城市',
-    car: '9座及以下个人非营业客车',
-    recommend: false
-  }]
+  offerList: []
 }
 const getters = {
   getOfferList (state) {
@@ -78,7 +31,20 @@ const getters = {
   }
 }
 const mutations = {
-  getOfferList (state) {},
+  getOfferList (state, This) {
+    This.$http({
+      method: 'jsonp',
+      url: company,
+      jsonp: 'callback',
+      jsonpCallback: 'json',
+      before: () => {
+      }
+    })
+    .then(res => {
+      state.offerList = res.body.data.companyList
+      console.log(res.body.data.companyList)
+    })
+  },
   getOffer (state) {}
 }
 export default {

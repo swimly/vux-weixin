@@ -1,8 +1,8 @@
 <template>
   <div class="page h">
-    <Scroller lock-x :height="height" v-model="status">
+    <Scroller lock-x :height="height">
       <div class="safe-list">
-        <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index">
+        <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index" @click.native="handleSaveData(item)">
             <span class="col v-m col-8 t-c ptb-10">
               <span class="img">
                 <img v-lazy="item.listPic" alt=""/>
@@ -39,6 +39,13 @@ export default {
     this.height = document.querySelector('.content').clientHeight + 'px'
   },
   methods: {
+    handleSaveData (item) {
+      this.$localStorage.set('orderCompany', JSON.stringify({
+        companyId: item.id,
+        banner: item.bigPic,
+        companyName: item.name
+      })) // 存储订单公司信息
+    },
     ...mapMutations({
       showLoading: 'updateLoadingStatus',
       getOfferList: 'getOfferList'
@@ -46,29 +53,7 @@ export default {
   },
   data () {
     return {
-      height: '0px',
-      status: {
-        pullupStatus: 'default'
-      },
-      pulldown: {
-        content: 'Pull Down To Refresh',
-        height: 60,
-        autoRefresh: true,
-        downContent: '下拉刷新',
-        upContent: '松手开始刷新',
-        loadingContent: '刷新中……',
-        clsPrefix: 'xs-plugin-pulldown-'
-      },
-      pullup: {
-        content: 'Pull Up To Refresh',
-        pullUpHeight: 60,
-        height: 60,
-        autoRefresh: true,
-        downContent: '松手开始加载',
-        upContent: '上拉加载更多……',
-        loadingContent: '加载中……',
-        clsPrefix: 'xs-plugin-pullup-'
-      }
+      height: '0px'
     }
   },
   computed: {

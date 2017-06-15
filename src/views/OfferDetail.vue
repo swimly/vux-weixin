@@ -1,10 +1,10 @@
 <template>
-  <div class="page gray has-footer">
+  <div class="page gray has-footer">{{InsuranceArea}}
     <div class="content">
       <div class="cover w">
-        <img style="height:25vh" class="w" v-lazy="'static/img/banner3.png'" alt=""/>
+        <img style="height:25vh" class="w" v-lazy="company.banner" alt=""/>
       </div>
-      <selectCity title="投保城市"></selectCity>
+      <selectCity title="投保城市" value="value"></selectCity>
       <group gutter="0">
         <x-input title="车牌号码" placeholder="请填写车牌号" placeholder-align="right" text-align="right"></x-input>
       </group>
@@ -29,14 +29,14 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-  import {Group, XAddress, ChinaAddressV3Data, Cell, XButton, XImg, XInput} from 'vux'
+  import {Group, XAddress, Cell, XButton, XImg, XInput} from 'vux'
   import selectCity from '@/components/SelectCity'
   export default {
     data () {
       return {
         loading: false,
-        addressData: ChinaAddressV3Data,
-        city: []
+        city: [],
+        company: {}
       }
     },
     components: {
@@ -49,10 +49,14 @@
       XInput
     },
     created () {
+      // 获取保险公司信息
+      this.company = JSON.parse(this.$localStorage.get('orderCompany'))
+      console.log(this.company)
     },
     computed: {
       ...mapGetters({
-        offer: 'getOffer'
+        offer: 'getOffer',
+        InsuranceArea: 'getInsuranceArea'
       })
     },
     methods: {

@@ -4,11 +4,11 @@
       <cell :title="title" is-link :value="selected" @click.native="show = true"></cell>
     </group>
     <div v-transfer-dom>
-      <popup v-model="show" position="bottom" height="50%" class="bg-f select">
+      <popup v-model="show" position="bottom" height="60%" class="bg-f select">
         <tab active-color='#EB3D00' v-model="index" class="select-tab">
           <tab-item :selected="index === active" v-for="(item, index) in tab" @click.native="active = index" :key="index">{{item}}</tab-item>
         </tab>
-        <swiper v-model="active" class="select-list" :show-dots="false" height="100%">
+        <swiper v-model="active" class="select-list" :show-dots="false" height="100%" :threshold="100">
           <swiper-item>
             <ul class="list" id="list">
               <li v-for="(item, index) in areaList" :key="index" @click="findCity(item.id, item.text)">{{item.text}}</li>
@@ -39,13 +39,14 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import {Group, Popup, Tab, TabItem, XButton, Swiper, Cell, SwiperItem, TransferDom, XSwitch} from 'vux'
 export default {
   name: 'hello',
   data () {
     return {
       tab: ['省', '市', '区'],
-      selected: '',
+      selected: '请选择',
       show: false,
       index: 0,
       active: 0,
@@ -120,13 +121,18 @@ export default {
       this.tab[2] = text
       this.show = false
       this.selected = this.tab.join(' ')
+      this.getArea(this.selected)
     },
     // 提交数据
     submit () {
       this.show = false
       this.selected = this.tab.join(' ')
+      this.getArea(this.selected)
       console.log(this.tab)
-    }
+    },
+    ...mapMutations({
+      getArea: 'getInsuranceArea'
+    })
   },
   created () {
     this.getAreaList(0)
@@ -154,6 +160,6 @@ export default {
 </style>
 <style>
 .select-text{font-size:14px;}
-.vux-slider.select-list > .vux-swiper{overflow-y:auto;}
+.vux-slider > .vux-swiper > .vux-swiper-item{overflow-y:auto;}
 .vux-tab.select-tab .vux-tab-item{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 </style>

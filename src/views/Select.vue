@@ -181,9 +181,12 @@
           card: JSON.parse(this.$localStorage.get('orderPic')),
           insurance: JSON.parse(this.$localStorage.get('orderInsurance'))
         }
+        this.$localStorage.remove('orderCompany')
+        this.$localStorage.remove('orderInsurance')
+        this.$localStorage.remove('orderPic')
+        this.$localStorage.remove('orderUser')
         this.$localStorage.set('order', JSON.stringify(order))
-        console.log(order)
-        // this.$router.push('/offer/success/' + this.$route.params.id)
+        this.$router.push('/offer/success/' + this.$route.params.id)
       }
     }
   }

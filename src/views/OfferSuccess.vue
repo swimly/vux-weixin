@@ -2,9 +2,9 @@
   <div class="page gray has-btn">
     <div class="h auto content">
       <group gutter="0px">
-        <cell title="张欣仪" value="鄂A548745"></cell>
-        <cell title="保险公司" value="中国平安保险"></cell>
-        <cell title="订单号" value="5415456624"></cell>
+        <cell :title="order.user.ownerName" :value="order.user.ownerLicense"></cell>
+        <cell title="保险公司" :value="order.company.companyName"></cell>
+        <cell title="订单号" :value="'46416313544'"></cell>
       </group>
       <div class="row w msg">
         <div class="col v-m col-7 t-r">
@@ -34,10 +34,19 @@
       Cell,
       XButton
     },
+    data () {
+      return {
+        order: {}
+      }
+    },
     methods: {
       handleSubmit () {
         this.$router.push('/policy/' + this.$route.params.id)
       }
+    },
+    created () {
+      this.order = JSON.parse(this.$localStorage.get('order'))
+      console.log(this.order)
     }
   }
 </script>

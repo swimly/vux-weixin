@@ -10,7 +10,6 @@ import VueLazyload from 'vue-lazyload'
 import VueHead from 'vue-head'
 import VueResource from 'vue-resource'
 import VueLocalStorage from 'vue-localstorage'
-
 Vue.use(VueLocalStorage)
 Vue.use(LoadingPlugin)
 

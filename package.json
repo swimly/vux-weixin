@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "fastclick": "^1.0.6",
+    "lrz": "^4.9.40",
     "vue": "^2.2.2",
+    "vue-base64-file-upload": "^1.0.4",
     "vue-echarts-v3": "^1.0.4",
     "vue-head": "^2.0.11",
     "vue-lazyload": "^1.0.4",

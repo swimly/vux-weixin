@@ -31,7 +31,7 @@
     </swiper>
     <h2 class="title">新品推荐</h2>
     <ul class="grid goods-list">
-      <li class="col col-12" v-for="(item, index) in news">
+      <li class="col col-12" v-for="(item, index) in products">
         <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveInfo">
           <span class="cover">
             <img v-lazy="item.listPic"/>
@@ -75,18 +75,18 @@
       }
     },
     created () {
-      this.getNewProduct(this)
+      this.getProductList(this)
     },
     computed: {
       ...mapGetters({
         nav: 'getMallNav',
-        news: 'getNewProduct'
+        products: 'getProductList'
       })
     },
     methods: {
       handleSaveInfo () {},
       ...mapMutations({
-        getNewProduct: 'getNewProduct'
+        getProductList: 'getProductList'
       })
     },
     components: {

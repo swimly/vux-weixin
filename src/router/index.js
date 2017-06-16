@@ -221,6 +221,12 @@ const router = new Router({
       component: (resolve) => {
         require(['@/views/OrderDetail'], resolve)
       }
+    }, {
+      path: '/wrong',
+      name: 'wrong',
+      component: (resolve) => {
+        require(['@/views/Browser'], resolve)
+      }
     }
   ]
 })

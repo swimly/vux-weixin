@@ -13,7 +13,6 @@
       </group>
       <group gutter="0">
         <x-input title="手机号" type="tel" is-type="china-mobile" placeholder="请填写真实手机号" placeholder-align="right" text-align="right" v-model="orderUser.tel" required ref="tel"></x-input>
-        {{orderUser}}
       </group>
     </div>
     <div class="footer row w">

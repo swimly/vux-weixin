@@ -1,7 +1,7 @@
 <template>
   <div>
     <group gutter="0">
-      <cell :title="title" is-link :value="selected" @click.native="show = true"></cell>
+      <cell :title="title" is-link :value="selected" @click.native="show = true" class="address"></cell>
     </group>
     <div v-transfer-dom>
       <popup v-model="show" position="bottom" height="60%" class="bg-f select">

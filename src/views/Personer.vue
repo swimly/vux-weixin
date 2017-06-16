@@ -123,5 +123,5 @@
 .weui-dialog__btn_primary{color:#EB3D00 !important;}
 .fix-blur{padding-top:200px;}
 .fix-blur .head-bar{margin-top:-200px;}
-.head-bar a{font-size:1.2rem;color:#fff;}
+.head-bar a{font-size:1.2rem;color:#fff;padding:0;}
 </style>

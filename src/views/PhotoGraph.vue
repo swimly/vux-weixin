@@ -5,7 +5,7 @@
       <h4 class="sub-module-title sub-line">身份证</h4>
       <div class="plr-10">
         <h4 class="sub-module-title sub-line">身份正面照<span class="info">（请与证件类型保持一致，照片以身份证为例）</span></h4>
-        <div class="tips icon">
+        <div class="tips icon" style="margin-top:0.8rem;">
           <ul class="row w">
             <li class="col v-m iconfont icon-zhuyi"></li>
             <li class="col v-m">
@@ -18,7 +18,7 @@
           <img v-if="form.idCard" v-lazy="form.idCard" alt="">
           <img v-if="!form.idCard" v-lazy="'static/img/sfz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input name="idcard" type="file" @change="handleFileChange">
+            <input name="idcard" type="file" @change="handleFileChange" capture="camera" accept='image/*'>
           </span>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <h4 class="sub-module-title sub-line">行驶证</h4>
       <div class="plr-10">
         <h4 class="sub-module-title sub-line">行驶证件正面照</span></h4>
-        <div class="tips icon">
+        <div class="tips icon" style="margin-top:0.8rem;">
           <ul class="row w">
             <li class="col v-m iconfont icon-zhuyi"></li>
             <li class="col v-m">
@@ -37,13 +37,13 @@
         </div>
         <div class="take-photo">
           <img v-if="form.drivingLicense" v-lazy="form.drivingLicense" alt="">
-          <img v-if="!form.drivingLicense" v-lazy="'static/img/jsz.png'" alt="">
+          <img v-if="!form.drivingLicense" v-lazy="'static/img/jszf.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input name="license" type="file" @change="handleFileChange">
+            <input name="license" type="file" @change="handleFileChange" capture="camera" accept='image/*'>
           </span>
         </div>
         <h4 class="sub-module-title sub-line">行驶证副本照</span></h4>
-        <div class="tips icon">
+        <div class="tips icon" style="margin-top:0.8rem;">
           <ul class="row w">
             <li class="col v-m iconfont icon-zhuyi"></li>
             <li class="col v-m">
@@ -55,7 +55,7 @@
           <img v-if="form.subDrivingLicense" v-lazy="form.subDrivingLicense" alt="">
           <img v-if="!form.subDrivingLicense" v-lazy="'static/img/jsz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input name="sublicense" type="file" @change="handleFileChange">
+            <input name="sublicense" type="file" @change="handleFileChange" capture="camera" accept='image/*'>
           </span>
         </div>
       </div>
@@ -106,6 +106,7 @@
               _this.form.subDrivingLicense = rst.base64
               break
           }
+          console.log(rst)
         })
       },
       handleSubmit () {

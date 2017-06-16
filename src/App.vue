@@ -13,6 +13,13 @@ export default {
   components: {
     Loading
   },
+  mounted () {
+    let useragent = navigator.userAgent
+    if (useragent.match(/MicroMessenger/i) !== 'MicroMessenger') {
+      console.log('只能用微信打开')
+      this.$router.replace('/wrong')
+    }
+  },
   created () {
     this.getAuthorInfo(this) // 获取用户登录信息
   },

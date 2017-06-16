@@ -64,7 +64,6 @@
   export default {
     data () {
       return {
-        order: {},
         forcedConfig: forced,
         basicConfig: basic,
         additionalConfig: additional,
@@ -175,14 +174,14 @@
             })
           }
         }
-        this.$localStorage.set('orderInsurance', JSON.stringify(insurance))
+        // this.$localStorage.set('orderInsurance', JSON.stringify(insurance))
         order = {
           company: JSON.parse(this.$localStorage.get('orderCompany')),
           user: JSON.parse(this.$localStorage.get('orderUser')),
           card: JSON.parse(this.$localStorage.get('orderPic')),
           insurance: JSON.parse(this.$localStorage.get('orderInsurance'))
         }
-        this.order = order
+        this.$localStorage.set('order', JSON.stringify(order))
         console.log(order)
         // this.$router.push('/offer/success/' + this.$route.params.id)
       }

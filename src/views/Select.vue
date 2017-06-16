@@ -64,60 +64,72 @@
   export default {
     data () {
       return {
+        order: {},
         forcedConfig: forced,
         basicConfig: basic,
         additionalConfig: additional,
         forcedInsurance: '', // 强制保险
         lossInsurance: 0,
         force: {
-          select: 1
+          select: 1,
+          name: '交通强险+车船税'
         },
         basic: {
           lossInsurance: {
             select: 0, // 车辆损失险
-            regardless: 1 // 不计免赔
+            name: '车辆损失保险',
+            regardless: true // 不计免赔
           },
           thirdParty: {
             select: 0, // 第三者责任险
+            name: '第三者责任险',
             value: '50万',
-            regardless: 1 // 不计免赔
+            regardless: true // 不计免赔
           },
           driverSeat: {
             select: 0, // 司机座位险
+            name: '司机座位险',
             value: '6万/座',
-            regardless: 1 // 不计免赔
+            regardless: true // 不计免赔
           },
           passengerSeat: {
             select: 0, // 乘客座位险
+            name: '乘客座位险',
             value: '1万/座',
-            regardless: 1 // 不计免赔
+            regardless: true // 不计免赔
           },
           robbery: {
-            select: 0 // 盗抢险
+            select: 0, // 盗抢险
+            name: '盗抢险'
           }
         },
         additional: {
           glassCrushing: {
             select: 0, // 玻璃破碎险
+            name: '玻璃破碎险',
             value: '国产',
-            regardless: 1
+            regardless: true
           },
           autoignition: {
             select: 0, // 自燃损失险
-            regardless: 1
+            name: '自燃损失险',
+            regardless: true
           },
           wading: {
             select: 0, // 涉水险
+            name: '涉水险',
             value: '1万/座',
-            regardless: 1
+            regardless: true
           },
           escape: {
             select: 0, // 三者逃逸险
-            regardless: 1
+            name: '无法找到第三方特约险',
+            regardless: true
           },
           appointedSpecialist: {
             select: 0, // 指定专修厂特约险
-            regardless: 1
+            name: '指定专修厂特约险',
+            regardless: true
           }
         }
       }
@@ -138,7 +150,41 @@
     },
     methods: {
       handleSubmit () {
-        this.$router.push('/offer/success/' + this.$route.params.id)
+        let insurance = []
+        let order = {}
+        if (this.force.select) {
+          insurance.push({
+            name: this.force.name
+          })
+        }
+        for (const i in this.basic) {
+          if (this.basic[i].select) {
+            insurance.push({
+              name: this.basic[i].name,
+              regardless: this.basic[i].regardless,
+              value: this.basic[i].value || null
+            })
+          }
+        }
+        for (const i in this.additional) {
+          if (this.additional[i].select) {
+            insurance.push({
+              name: this.additional[i].name,
+              regardless: this.additional[i].regardless,
+              value: this.additional[i].value || null
+            })
+          }
+        }
+        this.$localStorage.set('orderInsurance', JSON.stringify(insurance))
+        order = {
+          company: JSON.parse(this.$localStorage.get('orderCompany')),
+          user: JSON.parse(this.$localStorage.get('orderUser')),
+          card: JSON.parse(this.$localStorage.get('orderPic')),
+          insurance: JSON.parse(this.$localStorage.get('orderInsurance'))
+        }
+        this.order = order
+        console.log(order)
+        // this.$router.push('/offer/success/' + this.$route.params.id)
       }
     }
   }

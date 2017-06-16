@@ -18,16 +18,8 @@
           <img v-if="form.idCard" v-lazy="form.idCard" alt="">
           <img v-if="!form.idCard" v-lazy="'static/img/sfz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
+            <input type="file" @change="handleFileChange">
           </span>
-          <vue-base64-file-upload 
-            class="v1"
-            accept="image/png,image/jpeg"
-            image-class="v1-image"
-            input-class="v1-image"
-            :max-size="3"
-            @size-exceeded="onSizeExceeded"
-            @file="onFile"
-            @load="onLoad1" />
         </div>
       </div>
       <h3 class="module-title">车辆信息</h3>
@@ -47,7 +39,7 @@
           <img v-if="form.drivingLicense" v-lazy="form.drivingLicense" alt="">
           <img v-if="!form.drivingLicense" v-lazy="'static/img/jsz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input type="file" :value="form.drivingLicense" @change="handleFileChange">
+            <input type="file" @change="handleFileChange">
           </span>
         </div>
         <h4 class="sub-module-title sub-line">行驶证副本照</span></h4>
@@ -63,7 +55,7 @@
           <img v-if="form.subDrivingLicense" v-lazy="form.subDrivingLicense" alt="">
           <img v-if="!form.subDrivingLicense" v-lazy="'static/img/jsz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input type="file" :value="form.drivingLicense" @change="handleFileChange">
+            <input type="file" @change="handleFileChange">
           </span>
         </div>
       </div>
@@ -76,7 +68,6 @@
   </div>
 </template>
 <script>
-  import VueBase64FileUpload from 'vue-base64-file-upload'
   import {XButton} from 'vux'
   export default {
     head: {
@@ -87,43 +78,23 @@
     data () {
       return {
         form: {
-          idCard: '',
-          drivingLicense: '',
-          subDrivingLicense: ''
+          idCard: 'fawef',
+          drivingLicense: 'fawef',
+          subDrivingLicense: 'faweg'
         }
       }
     },
     components: {
-      XButton,
-      VueBase64FileUpload
+      XButton
     },
     methods: {
       handleTakePhoto () {
       },
-      handleFileChange (e) {
-        const files = e.target.files || e.dataTransfer.files
-        if (!files.length) return
-        this.createImage(files, e)
-      },
-      createImage (file, e) {
-        // let vm = this
-        // lrz(file[0])
-        // .then(rst => {
-        //   console.log(rst.base64)
-        // })
-      },
-      onFile (file) {
-        console.log(file)
-      },
-      onLoad1 (dataUri) {
-        console.log(dataUri)
-      },
-      onSizeExceeded (size) {
-        alert(`Image ${size}Mb size exceeds limits of ${this.customImageMaxSize}Mb!`)
+      handleFileChange (file) {
       },
       handleSubmit () {
         const id = this.$route.params.id
-        if (!this.form.isCard || !this.form.drivingLicense || !this.form.subDrivingLicense) {
+        if (!this.form.idCard || !this.form.drivingLicense || !this.form.subDrivingLicense) {
           this.$vux.toast.show({
             type: 'text',
             width: '10em',
@@ -131,12 +102,18 @@
             text: '请上传图片！',
             time: '1000'
           })
+        } else {
+          this.$localStorage.set('orderPic', JSON.stringify({
+            idCard: this.form.idCard,
+            drivingLicense: this.form.drivingLicense,
+            subDrivingLicense: this.form.subDrivingLicense
+          }))
+          this.$router.push('/offer/select/' + id)
         }
-        this.$router.push('/offer/select/' + id)
       }
     }
   }
 </script>
 <style>
-.iconfont input{width:100%;height:5rem;font-size:5rem;position:absolute;left:0;top:0;z-index:100;}
+.iconfont input{width:100%;height:5rem;font-size:5rem;position:absolute;left:0;top:0;z-index:100;opacity:0;}
 </style>

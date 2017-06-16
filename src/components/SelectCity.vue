@@ -21,7 +21,7 @@
           </swiper-item>
           <swiper-item>
             <ul class="list">
-              <li v-for="(item, index) in distList" :key="index" @click="showDist(item.text)">{{item.text}}</li>
+              <li v-for="(item, index) in distList" :key="index" @click="showDist(item.id, item.text)">{{item.text}}</li>
             </ul>
           </swiper-item>
         </swiper>
@@ -87,6 +87,7 @@ export default {
       .then(res => {
         this.areaList = res.body.data.areaList
       })
+      this.getArea(id)
     },
     // 获取二级列表
     findCity (id, text) {
@@ -101,6 +102,7 @@ export default {
         this.cityList = res.body.data.areaList
       })
       this.tab[0] = text
+      this.getArea(id)
     },
     // 获取三级列表
     findDist (id, text) {
@@ -115,13 +117,14 @@ export default {
         this.distList = res.body.data.areaList
       })
       this.tab[1] = text
+      this.getArea(id)
     },
     // 显示区域
-    showDist (text) {
+    showDist (id, text) {
       this.tab[2] = text
       this.show = false
       this.selected = this.tab.join(' ')
-      this.getArea(this.selected)
+      this.getArea(id)
     },
     // 提交数据
     submit () {

@@ -18,7 +18,7 @@
           <img v-if="form.idCard" v-lazy="form.idCard" alt="">
           <img v-if="!form.idCard" v-lazy="'static/img/sfz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input type="file" @change="handleFileChange">
+            <input name="idcard" type="file" @change="handleFileChange">
           </span>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <img v-if="form.drivingLicense" v-lazy="form.drivingLicense" alt="">
           <img v-if="!form.drivingLicense" v-lazy="'static/img/jsz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input type="file" @change="handleFileChange">
+            <input name="license" type="file" @change="handleFileChange">
           </span>
         </div>
         <h4 class="sub-module-title sub-line">行驶证副本照</span></h4>
@@ -55,7 +55,7 @@
           <img v-if="form.subDrivingLicense" v-lazy="form.subDrivingLicense" alt="">
           <img v-if="!form.subDrivingLicense" v-lazy="'static/img/jsz.png'" alt="">
           <span class="iconfont icon-add" @click="handleTakePhoto">
-            <input type="file" @change="handleFileChange">
+            <input name="sublicense" type="file" @change="handleFileChange">
           </span>
         </div>
       </div>
@@ -68,6 +68,7 @@
   </div>
 </template>
 <script>
+  import lrz from 'lrz/dist/lrz.all.bundle.js'
   import {XButton} from 'vux'
   export default {
     head: {
@@ -78,9 +79,9 @@
     data () {
       return {
         form: {
-          idCard: 'fawef',
-          drivingLicense: 'fawef',
-          subDrivingLicense: 'faweg'
+          idCard: '',
+          drivingLicense: '',
+          subDrivingLicense: ''
         }
       }
     },
@@ -91,6 +92,21 @@
       handleTakePhoto () {
       },
       handleFileChange (file) {
+        let files = file.target.files
+        const _this = this
+        lrz(files[0]).then(rst => {
+          switch (file.target.name) {
+            case 'idcard':
+              _this.form.idCard = rst.base64
+              break
+            case 'license':
+              _this.form.drivingLicense = rst.base64
+              break
+            case 'sublicense':
+              _this.form.subDrivingLicense = rst.base64
+              break
+          }
+        })
       },
       handleSubmit () {
         const id = this.$route.params.id

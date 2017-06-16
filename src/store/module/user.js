@@ -1,4 +1,4 @@
-import {login, sms, register, editPwd} from '../../config'
+import {login, sms, register, editPwd, information} from '../../config'
 const state = {
   logined: false,
   userInfo: {}
@@ -127,7 +127,6 @@ const mutations = {
           }
         })
         .then(res => {
-          console.log(res)
           if (res.body.data) {
             This.loading = false
             This.$vux.toast.show({
@@ -138,6 +137,7 @@ const mutations = {
               time: '1000'
             })
             state.logined = true
+            console.log(res.body.data.userInfo)
             state.userInfo = res.body.data.userInfo
             This.$localStorage.set('userInfo', JSON.stringify(state.userInfo))
             This.$localStorage.set('time', Date.parse(new Date()))
@@ -321,6 +321,24 @@ const mutations = {
   // 从localstorage获取用户登录信息
   getAuthorInfo (state, This) {
     state.userInfo = JSON.parse(This.$localStorage.get('userInfo'))
+  },
+  editInformation (state, This) {
+    // delete This.userInfo.userArea
+    // delete This.userInfo.userBalance
+    // delete This.userInfo.userCumulative
+    This.$http({
+      method: 'jsonp',
+      url: information,
+      jsonp: 'callback',
+      jsonpCallback: 'json',
+      params: This.userInfo,
+      before: () => {
+        This.loading = true
+      }
+    })
+    .then(res => {
+      console.log(res)
+    })
   }
 }
 export default {

@@ -1,48 +1,48 @@
 <template>
   <div class="page gray row h w">
-    <div class="col v-m t-c">
+    <div class="col v-m t-c" style="padding:0 1rem;">
       <div class="face">
         <img src="static/img/face.jpg" alt="">
       </div>
-      <div class="form-panel">
-        <div class="form w icon-left"><input type="text" placeholder="请输入手机号" v-model="form.username"><span class="iconfont icon-user"></span></div>
-        <group gutter="10px">
-          <datetime placeholder="请选择出生年月" confirm-text="确认" cancel-text="取消"></datetime>
-          <span class="iconfont icon-shengri"></span>
-        </group>
-        <div class="w white sex">
-          <span class="iconfont icon-xingbie"></span>
-          <div class="row w">
-            <div class="col v-m col-8">
+      <group gutter="30px">
+        <x-input v-model="userInfo.userName" text-align="right">
+          <span class="iconfont icon-user" slot="label"></span>
+        </x-input>      
+      </group>
+      <group gutter="10px">
+        <datetime :title="birthIcon" placeholder="请选择出生日期" :min-year="1950" confirm-text="确认" cancel-text="取消" v-model="userInfo.birthday"></datetime>
+      </group>
+      <group gutter="10px">
+        <cell class="sex">
+          <span class="iconfont icon-xingbie" slot="icon"></span>
+          <ul slot="default" class="row w">
+            <li class="col v-m">
               <div class="checkbox circle right">
-                <input type="checkbox">
+                <input type="radio" name="sex" value="0" id="s1" v-model="userInfo.userSex">
                 <span class="iconfont icon-dot"></span>
-                <label for="">保密</label>
+                <label for="s1">保密</label>
               </div>
-            </div>
-            <div class="col v-m col-8">
               <div class="checkbox circle right">
-                <input type="checkbox">
+                <input type="radio" name="sex" value="1" id="s2" v-model="userInfo.userSex">
                 <span class="iconfont icon-dot"></span>
-                <label for="">男</label>
+                <label for="s2">男</label>
               </div>
-            </div>
-            <div class="col v-m col-8">
               <div class="checkbox circle right">
-                <input type="checkbox">
+                <input type="radio" name="sex" value="2" id="s3" v-model="userInfo.userSex">
                 <span class="iconfont icon-dot"></span>
-                <label for="">女</label>
+                <label for="s3">女</label>
               </div>
-            </div>
-          </div>
-        </div>
-        <x-button type="warn" style="margin-top:40px;">确认修改</x-button>  <!--show-loading-->
-      </div>
+            </li>
+          </ul>
+        </cell>
+      </group>
+      <x-button type="warn" style="margin-top:40px;" @click.native="handleSubmit" :show-loading="loading">确认修改</x-button>  <!--show-loading-->
     </div>
   </div>
 </template>
 <script>
   import {XInput, Group, Datetime, XButton, Cell} from 'vux'
+  import {mapMutations} from 'vuex'
   export default {
     head: {
       title: {
@@ -51,10 +51,27 @@
     },
     data () {
       return {
+        loading: false,
+        birthIcon: '<span class="iconfont icon-shengri"></span>',
+        userInfo: {},
         form: {
-          username: '刘勇'
+          userId: '',
+          userName: '刘勇',
+          birthday: '',
+          userSex: ''
         }
       }
+    },
+    created () {
+      this.userInfo = JSON.parse(this.$localStorage.get('userInfo'))
+    },
+    methods: {
+      handleSubmit () {
+        this.editInformation(this)
+      },
+      ...mapMutations({
+        editInformation: 'editInformation'
+      })
     },
     components: {
       XInput,
@@ -74,7 +91,11 @@
 .form .icon-right{right:0;left:auto;font-size:1.4rem;transform:translate(0, -50%);}
 .icon-shengri{position:absolute;left:1rem;top:50%;transform:translate(0,-50%);}
 .weui-cell{padding:1rem;font-size:1.2rem;border:1px solid #E6E6E6;}
-.sex{position:relative;padding:0.8rem 1rem 0.8rem 3rem;border:1px solid #E6E6E6;margin-top:10px;font-size:1.2rem;}
 .sex .checkbox label{font-size:1.2rem;color:#666;}
 .sex .icon-xingbie{position:absolute;left:1rem;top:50%;transform:translate(0,-50%);font-size:1.8rem;color:#959595;}
+</style>
+<style>
+.vux-datetime .iconfont{color:#959595;font-size:1.8rem;}
+.sex .weui-cell__ft{width:90%;}
+.sex{padding:1.2rem 1rem !important;}
 </style>

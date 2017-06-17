@@ -92,7 +92,6 @@
       XImg
     },
     created () {
-      this.getType()
     },
     methods: {
       handleSort () {
@@ -106,96 +105,6 @@
         this.active = index
       },
       handleSwiper (index) {
-      },
-      getType () {
-        this.$http({
-          method: 'jsonp',
-          url: 'http://liuwbox.com/zzbao/app/shop/type.htm',
-          jsonp: 'callback',
-          jsonpCallback: 'json'
-        })
-        .then(res => {
-          console.log(res.data.data.typeList)
-          var arr = []
-          res.data.data.typeList.forEach(function (el) {
-            let {id: key, name: value} = {id: el.id, name: el.name}
-            arr.push({key: key, value: value})
-          })
-          this.bar[0].options = arr
-          let typeList = res.data.data.typeList // 获取分类列表
-          let typeId = 0 // 根据分类名称获取分类id
-          function getTypeId (name) {
-            typeList.forEach(function (el) {
-              if (el.name === name) {
-                typeId = el.id
-              }
-            })
-          }
-          switch (this.type) {
-            case 'new':
-              this.option = '新品上市'
-              getTypeId(this.option)
-              this.getData(typeId) // 分类id传参获取分类数据
-              break
-            case 'exchange':
-              this.option = '超值兑换'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            case 'car':
-              this.option = '时尚车载'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            case 'bag':
-              this.option = '精品箱包'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            case 'home':
-              this.option = '居家生活'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            case 'drink':
-              this.option = '酒水茶具'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            case 'accessories':
-              this.option = '潮品配饰'
-              getTypeId(this.option)
-              this.getData(typeId)
-              break
-            default:
-              this.option = '全部'
-              getTypeId(this.option)
-              this.getData()
-          }
-        })
-      },
-      getData (type = 0, timeOrder = 0, priceOrder = 0, defaultOrder = 0, limit = 10, pageIndex = 0) {
-        this.$http({
-          method: 'jsonp',
-          url: 'http://liuwbox.com/zzbao/app/shop/product.htm?',
-          params: {
-            type: type,
-            timeOrder: timeOrder,
-            priceOrder: priceOrder,
-            defaultOrder: defaultOrder,
-            limit: limit,
-            pageIndex: pageIndex
-          },
-          jsonp: 'callback',
-          jsonpCallback: 'json'
-        })
-        .then(res => {
-          console.log(res.data.data.productList)
-          this.activeList = res.data.data.productList
-        })
-        .catch(e => {
-          console.log(e)
-        })
       }
     }
   }

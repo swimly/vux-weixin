@@ -4,7 +4,10 @@ export const register = 'http://liuwbox.com/zzbao/app/user/regist.htm' // 注册
 export const editPwd = 'http://liuwbox.com/zzbao/app/user/resetPwd.htm' // 修改密码接口
 export const company = 'http://liuwbox.com/zzbao/app/insurance/company.htm' // 保险公司接口
 export const product = 'http://liuwbox.com/zzbao/app/shop/product.htm' // 保险公司接口
+export const productType = 'http://liuwbox.com/zzbao/app/shop/type.htm' // 保险公司接口
 export const information = 'http://liuwbox.com/zzbao/app/user/edit.htm' // 保险公司接口
+export const editLoginPwd = 'http://liuwbox.com/zzbao/app/user/editPwd.htm' // 修改登录密码
+export const resetPayPwd = 'http://liuwbox.com/zzbao/app/user/resetPay.htm' // 充值支付密码
 export const tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential'
 export const ticketUrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
 export const appId = 'wxabf1c20c98f9cf4c'

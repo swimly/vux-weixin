@@ -18,10 +18,10 @@
         </router-link>
       </div>
     </div>
-    <div class="grid t-c white mt-5 click top-line sub-line quick">
-      <router-link :to="item.url" class="col col-6" v-for="(item, index) in nav" :key="index">
-        <img class="icon" v-lazy="item.icon" alt=""/>
-        <b class="block fs-1 c-n">{{item.text}}</b>
+    <div class="grid t-l white mt-5 click top-line sub-line quick">
+      <router-link :to="'/mall/' + item.id" class="col col-6 t-c" v-for="(item, index) in nav" :key="index">
+        <img class="icon" v-lazy="'static/img/index1.png'" alt=""/>
+        <b class="block fs-1 c-n">{{item.name}}</b>
       </router-link>
     </div>
     <swiper class="w" :aspect-ratio="83/360" dots-position="center" auto>
@@ -75,7 +75,7 @@
       }
     },
     created () {
-      this.getProductList(this)
+      this.getProduct(this)
     },
     computed: {
       ...mapGetters({
@@ -86,7 +86,7 @@
     methods: {
       handleSaveInfo () {},
       ...mapMutations({
-        getProductList: 'getProductList'
+        getProduct: 'getProduct'
       })
     },
     components: {

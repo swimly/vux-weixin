@@ -8,6 +8,7 @@ export const productType = 'http://liuwbox.com/zzbao/app/shop/type.htm' // 保�
 export const information = 'http://liuwbox.com/zzbao/app/user/edit.htm' // 保险公司接口
 export const editLoginPwd = 'http://liuwbox.com/zzbao/app/user/editPwd.htm' // 修改登录密码
 export const resetPayPwd = 'http://liuwbox.com/zzbao/app/user/resetPay.htm' // 充值支付密码
+export const submitOrder = 'http://liuwbox.com/zzbao/app/order/submit.htm' // 提交保险订单
 export const tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential'
 export const ticketUrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
 export const appId = 'wxabf1c20c98f9cf4c'

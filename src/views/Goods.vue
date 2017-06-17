@@ -25,21 +25,21 @@
       <div class="form-wrap">
         <h2>请填写收货地址</h2>
         <group gutter="10px" class="bor">
-          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入姓名" required>
+          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入姓名" required v-model="form.consignee">
             <span slot="label" class="label">收货人</span>
           </x-input>
         </group>
         <group gutter="10px" class="bor">
-          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入手机号码" required>
+          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入手机号码" required v-model="form.phone">
             <span slot="label" class="label">手机号码</span>
           </x-input>
         </group>
         <group gutter="10px" class="bor">
-          <x-address title="地址" :list="address" required>
+          <x-address title="地址" :list="address" required v-model="place">
           </x-address>
         </group>
         <group gutter="10px" class="bor">
-          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入街道等详细信息" required>
+          <x-input type="tel" label-width="5rem" style="text-align:right" placeholder="请输入街道等详细信息" required v-model="form.address">
             <span slot="label" class="label">详细地址</span>
           </x-input>
         </group>
@@ -92,7 +92,15 @@
         order: false,
         tips: false,
         address: ChinaAddressV3Data,
-        toast: false
+        toast: false,
+        place: [],
+        form: {
+          userId: '',
+          ProductId: '',
+          consignee: '',
+          phone: '',
+          address: ''
+        }
       }
     },
     created () {
@@ -103,11 +111,10 @@
         this.order = true
       },
       handleSubmit () {
-        this.order = false
-        this.toast = true
-        setTimeout(() => {
-          this.tips = true
-        }, 2000)
+        this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+        this.form.ProductId = this.$route.params.id
+        this.form.address = this.place + this.form.address
+        console.log(this.form)
       }
     }
   }

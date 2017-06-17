@@ -323,9 +323,9 @@ const mutations = {
     state.userInfo = JSON.parse(This.$localStorage.get('userInfo'))
   },
   editInformation (state, This) {
-    // delete This.userInfo.userArea
-    // delete This.userInfo.userBalance
-    // delete This.userInfo.userCumulative
+    delete This.userInfo.userArea
+    delete This.userInfo.userBalance
+    delete This.userInfo.userCumulative
     This.$http({
       method: 'jsonp',
       url: information,

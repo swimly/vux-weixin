@@ -106,7 +106,7 @@ img{border:none;vertical-align: top;}
 .goods-list .col{padding:0.5rem;}
 .goods{background:#fff;display:block;padding:0.5rem;}
 .goods .cover{display:inline-block;width:100%;text-align:center;height:10rem;background:#fff;}
-.goods .cover img{max-width:100%;max-height:100%;}
+.goods .cover img{width:100%;height:100%;}
 .goods .name{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-size:1.1rem;color:#424242;}
 /*车险报价*/
 .safe-list > .row{border-bottom:1px solid #EBEBEB;position:relative;}
@@ -176,4 +176,15 @@ input::-webkit-input-placeholder{font-size:1.2rem;}
 }
 @media screen and (max-width: 320px) {
   html{font-size:calc(3.9vw);}
+}
+
+img[lazy=loading] {
+  /*your style here*/
+}
+img[lazy=error] {
+  /*your style here*/
+  background:#f00;
+}
+img[lazy=loaded] {
+  /*your style here*/
 }

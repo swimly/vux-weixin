@@ -60,7 +60,7 @@
   import {Group, Cell, XButton} from 'vux'
   import {mapGetters} from 'vuex'
   import SelectItem from '@/components/SelectItem'
-  import {basic, additional, forced} from '../config'
+  import {basic, additional, forced, submitOrder} from '../config'
   export default {
     data () {
       return {
@@ -186,6 +186,22 @@
         this.$localStorage.remove('orderPic')
         this.$localStorage.remove('orderUser')
         this.$localStorage.set('order', JSON.stringify(order))
+        this.$http({
+          method: 'jsonp',
+          url: submitOrder,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: {
+            userId: JSON.parse(this.$localStorage.get('userInfo')).userId,
+            orderInfo: order
+          },
+          before: () => {
+            this.loading = true
+          }
+        })
+        .then(res => {
+          console.log(res)
+        })
         this.$router.push('/offer/success/' + this.$route.params.id)
       }
     }

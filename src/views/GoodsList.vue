@@ -10,19 +10,17 @@
       <swiper v-model="active" :show-dots="false" class="h" :height="height" @on-index-change="handleSwiper">
         <swiper-item v-for="(item, index) in bar" :key="index" class="h auto">
           <div class="tab-swiper vux-center h">
-            <Scroller lock-x :height="height" bounce>
-              <ul class="grid goods-list">
-                <li class="col col-12" v-for="(item, index) in activeList">
-                  <router-link :to="'/goods/' + item.id" class="goods">
-                    <span class="cover">
-                      <x-img :src="item.cover"></x-img>
-                    </span>
-                    <b class="name">{{item.name}}</b>
-                    <span class="c-red">积分<b class="score">{{item.score}}</b></span>
-                  </router-link>
-                </li>
-              </ul>
-            </Scroller>
+            <ul class="grid goods-list">
+              <li class="col col-12" v-for="(item, index) in list">
+                <router-link :to="'/goods/' + item.id" class="goods">
+                  <span class="cover">
+                    <x-img class="w h" :src="item.cover"></x-img>
+                  </span>
+                  <b class="name">{{item.name}}</b>
+                  <span class="c-red">积分<b class="score">{{item.score}}</b></span>
+                </router-link>
+              </li>
+            </ul>
           </div>
         </swiper-item>
       </swiper>

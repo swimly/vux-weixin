@@ -1,4 +1,4 @@
-import {product, productType} from '../../config'
+import {product} from '../../config'
 const state = {
   mallNav: [],
   productList: []
@@ -15,32 +15,17 @@ const mutations = {
   getProduct (state, This) {
     This.$http({
       method: 'jsonp',
-      url: productType,
+      url: product,
       jsonp: 'callback',
-      jsonpCallback: 'json'
+      jsonpCallback: 'json',
+      params: This.product
     })
     .then(res => {
-      state.mallNav = res.body.data.typeList
-      This.$localStorage.set('goodsType', JSON.stringify(res.body.data.typeList))
-      This.$http({
-        method: 'jsonp',
-        url: product,
-        jsonp: 'callback',
-        jsonpCallback: 'json',
-        params: This.product,
-        before: () => {
-        }
-      })
-      .then(res => {
-        state.productList = res.body.data.productList
-      })
+      console.log(res)
     })
   }
 }
 const actions = {
-  getProductType ({commit}, This) {
-    commit('getProductType', This)
-  }
 }
 export default {
   state,

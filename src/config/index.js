@@ -63,4 +63,4 @@ export const additional = [
     name: 'appointedSpecialist'
   }
 ]
-export const time = 60 // 获取验证码时间间隔单位：秒
+export const time = 600 // 获取验证码时间间隔单位：秒

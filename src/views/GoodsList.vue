@@ -1,9 +1,9 @@
 <template>
   <div class="page gray has-tab">
     <tab class="sort" v-model="index">
-      <tab-item selected :class="'select ' + item.sort" @on-item-click="active = index" v-for="(item, index) in bar" :key="index" :selected="index === active">
-        <popup-radio :options="item.options" position="top" v-model="option" @click.native="handleSort" @on-change="handleChangeSort" v-if="item.options"></popup-radio>
-        <span v-if="!item.options">{{item.text}}</span>
+      <tab-item selected class="select" :class="{sort: item.sort}" @on-item-click="handleChange" v-for="(item, index) in bar" :key="index" :selected="index === active">
+        <span v-if="index > 0">{{item.text}}</span>
+        <span v-if="index === 0" :class="select ? 'active' : ''">{{option}}</span>
       </tab-item>
     </tab>
     <div class="h content">
@@ -27,11 +27,16 @@
         </swiper-item>
       </swiper>
     </div>
+    <popup position="top" v-model="select" class="popUp">
+      <group gutter="0">
+        <cell v-for="(item, index) in options" :title="item.name" is-link :link="'/mall/' + item.id" @click.native="handleSelect(item)"></cell>
+      </group>
+    </popup>
   </div>
 </template>
 <script>
-  import {Tab, TabItem, PopupRadio, Popup, Swiper, SwiperItem, Scroller, XImg} from 'vux'
-  import {mapGetters} from 'vuex'
+  import {Tab, TabItem, Popup, Swiper, SwiperItem, Scroller, XImg, Group, Cell} from 'vux'
+  import {mapGetters, mapMutations} from 'vuex'
   export default {
     computed: {
       ...mapGetters({
@@ -44,27 +49,29 @@
     data () {
       return {
         height: '',
+        class: '',
         sort: false,
         index: 0,
         active: 0,
         typeList: [],
         typeId: 0,
+        select: false,
         bar: [{
           text: '全部',
-          key: 'all',
-          options: [] // 分类下拉列表
+          key: 'all'
         }, {
           text: '默认',
           key: 'default'
         }, {
           text: '最新',
           key: 'news',
-          sort: 'default'
+          sort: false
         }, {
           text: '积分',
           key: 'score',
-          sort: 'default'
+          sort: false
         }],
+        options: [],
         option: '全部',
         // 请求的初始参数
         product: {
@@ -84,14 +91,27 @@
     components: {
       Tab,
       TabItem,
-      PopupRadio,
       Popup,
       Swiper,
       SwiperItem,
       Scroller,
-      XImg
+      XImg,
+      Group,
+      Cell
     },
     created () {
+      this.options = JSON.parse(this.$localStorage.get('goodsType'))
+      this.options.push({
+        id: 0,
+        name: '全部'
+      })
+      this.product.type = this.$route.params.type
+      for (const i in this.options) {
+        if (this.options[i].id === this.product.type) {
+          this.option = this.options[i].name
+        }
+      }
+      this.getProduct(this)
     },
     methods: {
       handleSort () {
@@ -103,9 +123,45 @@
       },
       handleChange (index) {
         this.active = index
+        if (index === 0) {
+          // 弹出选择
+          console.log(0)
+          this.select = true
+        } else if (index === 1) {
+          this.product.defaultOrder = 1
+          this.getProduct(this)
+        } else if (index === 2) {
+          if (this.product.timeOrder === 0) {
+            this.product.timeOrder = 1
+            this.bar[index].sort = true
+          } else {
+            this.product.timeOrder = 0
+            this.bar[index].sort = false
+          }
+          this.getProduct(this)
+        } else if (index === 3) {
+          if (this.product.priceOrder === 0) {
+            this.product.priceOrder = 1
+            this.bar[index].sort = true
+          } else {
+            this.product.priceOrder = 0
+            this.bar[index].sort = false
+          }
+          this.getProduct(this)
+        }
+      },
+      handleSelect (item) {
+        console.log(item)
+        this.option = item.name
+        this.product.type = item.id
+        this.select = false
+        this.getProduct(this)
       },
       handleSwiper (index) {
-      }
+      },
+      ...mapMutations({
+        getProduct: 'getProduct'
+      })
     }
   }
 </script>
@@ -118,9 +174,11 @@
 .sort .weui-cell__ft:after{display:none;}
 .sort .vux-tab-selected .weui-cell__ft{color:#EB3D00;}
 .vux-popup-dialog.vux-popup-top{top:44px !important;}
-.vux-tab-item.default:after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/default.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
-.vux-tab-item.default.vux-tab-selected:after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/asc.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
-.vux-tab-item.sort.vux-tab-selected:after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/dec.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
+.vux-tab-item.select:nth-child(3):after,.vux-tab-item.select:nth-child(4):after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/default.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
+.vux-tab-item.select.vux-tab-selected:nth-child(3):after,.vux-tab-item.select.vux-tab-selected:nth-child(4):after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/asc.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
+.vux-tab-item.sort.vux-tab-selected:nth-child(3):after,.vux-tab-item.sort.vux-tab-selected:nth-child(4):after{content:"";display:inline-block;width:1rem;height:1rem;background:url(../assets/img/dec.png) no-repeat center center;background-size:1.4rem;vertical-align:middle;}
 .page.has-tab{padding-top:44px;}
 .has-tab .vux-tab{margin-top:-44px;}
+.popUp a{display:block;font-size:1rem;color:#666;padding:0.6rem 1rem;background:#fff;border-top:1px solid #eee;}
+.popUp a:active{background:rgba(0,0,0,0.1)}
 </style>

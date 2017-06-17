@@ -35,6 +35,7 @@
     data () {
       return {
         loading: false,
+        company: {},
         orderUser: {
           license: '',
           name: '',

@@ -1,12 +1,12 @@
 <template>
-  <div class="page gray">
+  <scroller class="page gray">
     <group class="question" gutter="0">
       <collapse :selected="false" v-for="(item, index) in list" :key="index">
         <h2 slot="collapse-header">{{item.title}}</h2>
         <p slot="collapse-body">{{item.content}}</p>
       </collapse>
     </group>
-  </div>
+  </scroller>
 </template>
 <script>
   import {Group, Cell} from 'vux'

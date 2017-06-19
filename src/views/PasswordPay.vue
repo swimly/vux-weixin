@@ -1,5 +1,5 @@
 <template>
-  <div class="page gray form-panel">
+  <scroller class="page gray form-panel">
     <group gutter="0">
       <x-input placeholder="请输入支付密码" ref="pay" v-model="form.payPwd">
         <span class="iconfont icon-mima" slot="label"></span>
@@ -28,7 +28,7 @@
     <group>
       <x-button type="warn" @click.native="handleSubmit" :show-loading="loading">确认修改</x-button>
     </group>
-  </div>
+  </scroller>
 </template>
 <script>
   import {Group, XInput, XButton, Countdown} from 'vux'

@@ -1,18 +1,18 @@
 <template>
   <div class="page gray has-btn">
     <div class="content h auto">
-      <x-img class="w" src="http://placeholder.qiniudn.com/600x300/F74C31/ffffff"></x-img>
+      <img style="height:30vh" class="w" v-lazy="goods.infoPic">
       <group class="info" gutter="0px">
-        <h2>斧子没蜂蜜面膜</h2>
-        <p class="c-red"><span class="num">299</span>积分</p>
+        <h2>{{goods.name}}</h2>
+        <p class="c-red"><span class="num">{{goods.score}}</span>积分</p>
       </group>
       <group gutter="10px">
         <div class="detail">
           <h3 class="title">详细说明：</h3>
           <h4 class="sub-title">商品详情</h4>
-          <p class="text">当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false</p>
+          <p class="text">{{goods.content}}</p>
           <h4 class="sub-title">商品详情</h4>
-          <p class="text">当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false当日期变化时是否重新渲染日历，如果是渲染了多个日历的话需要设为false</p>
+          <p class="text" v-html="goods.spec"></p>
         </div>
       </group>
     </div>
@@ -35,7 +35,7 @@
           </x-input>
         </group>
         <group gutter="10px" class="bor">
-          <x-address title="地址" :list="address" required v-model="place">
+          <x-address title="地址" :list="address" required v-model="place" raw-value>
           </x-address>
         </group>
         <group gutter="10px" class="bor">
@@ -65,7 +65,7 @@
           </li>
         </ul>
         <group>
-          <x-button type="warn" @click.native="tips = false">确定</x-button>
+          <x-button type="warn" @click.native="tips = false" :show-loading="loading">确定</x-button>
         </group>
       </div>
     </x-dialog>
@@ -74,6 +74,7 @@
 </template>
 <script>
   import {Group, XImg, XButton, XDialog, XInput, XAddress, ChinaAddressV3Data, Icon, Toast} from 'vux'
+  import {exchange} from '../config'
   export default {
     components: {
       Group,
@@ -88,15 +89,17 @@
     },
     data () {
       return {
+        loading: false,
         id: 0,
         order: false,
         tips: false,
         address: ChinaAddressV3Data,
         toast: false,
         place: [],
+        goods: {},
         form: {
           userId: '',
-          ProductId: '',
+          productId: '',
           consignee: '',
           phone: '',
           address: ''
@@ -105,6 +108,8 @@
     },
     created () {
       this.id = this.$route.params.id
+      // 获取商品详情
+      this.goods = JSON.parse(this.$localStorage.get('goods'))
     },
     methods: {
       handleOrder () {
@@ -112,9 +117,33 @@
       },
       handleSubmit () {
         this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
-        this.form.ProductId = this.$route.params.id
-        this.form.address = this.place + this.form.address
-        console.log(this.form)
+        this.form.productId = this.$route.params.id
+        this.form.address = this.place + ',' + this.form.address
+        this.$http({
+          method: 'jsonp',
+          url: exchange,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: this.form,
+          before: () => {
+            this.loading = true
+            this.order = false
+          }
+        })
+        .then(res => {
+          this.loading = false
+          if (res.body.status) {
+            this.tips = true
+          } else {
+            this.$vux.toast.show({
+              type: 'text',
+              width: '15em',
+              position: 'bottom',
+              text: res.body.msg,
+              time: '1000'
+            })
+          }
+        })
       }
     }
   }

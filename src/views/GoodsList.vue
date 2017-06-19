@@ -12,7 +12,7 @@
           <div class="tab-swiper vux-center h">
             <ul class="grid goods-list">
               <li class="col col-12" v-for="(item, index) in list">
-                <router-link :to="'/goods/' + item.id" class="goods">
+                <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveData(item)">
                   <span class="cover">
                     <x-img class="w h" :src="item.cover"></x-img>
                   </span>
@@ -156,6 +156,10 @@
         this.getProduct(this)
       },
       handleSwiper (index) {
+      },
+      handleSaveData (item) {
+        console.log(item)
+        this.$localStorage.set('goods', JSON.stringify(item))
       },
       ...mapMutations({
         getProduct: 'getProduct'

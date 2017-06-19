@@ -44,10 +44,13 @@
     created () {
       // console.log(this.$wechat)
       console.log(dateFormat(645116400000))
+      if (this.checkAuthor) {
+        this.$router.replace('/offer')
+      }
     },
     computed: {
       ...mapGetters({
-        author: 'chekLogined'
+        checkAuthor: 'checkAuthor'
       })
     },
     components: {

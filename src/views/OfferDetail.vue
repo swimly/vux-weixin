@@ -56,11 +56,22 @@
       // 获取保险公司信息
       this.company = JSON.parse(this.$localStorage.get('orderCompany'))
       console.log(this.company)
+      if (!this.checkAuthor) {
+        this.$vux.toast.show({
+          type: 'text',
+          width: '20em',
+          position: 'bottom',
+          text: '您尚未登录，请前往登录！',
+          time: '1000'
+        })
+        this.$router.push('/login')
+      }
     },
     computed: {
       ...mapGetters({
         offer: 'getOffer',
-        InsuranceArea: 'getInsuranceArea'
+        InsuranceArea: 'getInsuranceArea',
+        checkAuthor: 'checkAuthor'
       })
     },
     methods: {

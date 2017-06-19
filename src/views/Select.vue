@@ -19,7 +19,7 @@
           </div>
           <div class="form select" slot="title" v-if="item.value">
             <select v-model="basic[item.name].value">
-              <option v-for="(item, index) in item.value" v-bind:value="item">{{item}}</option>
+              <option v-for="(item, index) in item.value" v-bind:value="index">{{item}}</option>
             </select>
           </div>
           <div class="checkbox circle right" slot="value" v-if="item.regardless" v-show="basic[item.name].select">
@@ -38,7 +38,7 @@
           </div>
           <div class="form select" slot="title" v-if="item.value">
             <select v-model="additional[item.name].value">
-              <option v-for="(item, index) in item.value" v-bind:value="item">{{item}}</option>
+              <option v-for="(item, index) in item.value" v-bind:value="index">{{item}}</option>
             </select>
           </div>
           <div class="checkbox circle right" slot="value" v-if="item.regardless" v-show="additional[item.name].select">
@@ -181,10 +181,10 @@
           card: JSON.parse(this.$localStorage.get('orderPic')),
           insurance: JSON.parse(this.$localStorage.get('orderInsurance'))
         }
-        this.$localStorage.remove('orderCompany')
-        this.$localStorage.remove('orderInsurance')
-        this.$localStorage.remove('orderPic')
-        this.$localStorage.remove('orderUser')
+        // this.$localStorage.remove('orderCompany')
+        // this.$localStorage.remove('orderInsurance')
+        // this.$localStorage.remove('orderPic')
+        // this.$localStorage.remove('orderUser')
         this.$localStorage.set('order', JSON.stringify(order))
         this.$http({
           method: 'jsonp',

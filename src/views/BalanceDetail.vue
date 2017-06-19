@@ -10,8 +10,8 @@
     </div>
     <scroller style="top:15vh;bottom:0;">
       <h2 class="title"><span class="iconfont icon-jilu"></span>收入记录</h2>
-      <group gutter="0px">
-        <cell v-for="(item, index) in list" :key="index">
+      <group gutter="0px" v-for="(item, index) in list" :key="index">
+        <cell>
           <ul class="row w">
             <li class="col v-m col-4 t-c green">+{{item.score}}</li>
             <li class="col v-m col-20">

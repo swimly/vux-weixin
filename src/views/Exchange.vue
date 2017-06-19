@@ -68,6 +68,7 @@
         }
         setTimeout(() => {
           let start = this.bottom + 1
+          console.log(start)
           for (let i = start; i < start + this.form.limit; i++) {
             this.list.push(i + ' - keep walking, be 2 with you.')
           }

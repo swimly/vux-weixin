@@ -18,7 +18,16 @@
     </blur>
     <div class="h auto view">
       <div class="p-1 white sub-line">
-        <score-item class="default" :data="userInfo || {}"></score-item>
+        <div class="row w default">
+          <router-link to="/detail" class="col v-m col-12 t-c">
+            <h2 class="num">{{cumulative}}</h2>
+            <p class="text">累计积分收入（分）</p>
+          </router-link>
+          <router-link to="/balanceDetail" class="col v-m col-12 t-c">
+            <h2 class="num">{{balance}}</h2>
+            <p class="text">积分余额（分）</p>
+          </router-link>
+        </div>
       </div>
       <div class="mt-5 white sub-line top-line mb-5">
         <div class="row w order">
@@ -68,6 +77,7 @@
   import {Blur, XImg, Group, Cell, XButton, Confirm, Scroller} from 'vux'
   import ScoreItem from '@/components/ScoreItem'
   import {mapGetters, mapMutations} from 'vuex'
+  import {wallet} from '../config'
   export default {
     head: {
       title: {
@@ -76,13 +86,35 @@
     },
     data () {
       return {
-        logout: false
+        logout: false,
+        balance: 0,
+        cumulative: 0
       }
     },
     computed: {
       ...mapGetters({
-        userInfo: 'getUserInfo'
+        userInfo: 'getUserInfo',
+        checkAuthor: 'checkAuthor'
       })
+    },
+    created () {
+      if (this.$localStorage.get('logined')) {
+        const userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+        this.$http({
+          method: 'jsonp',
+          url: wallet,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: {
+            userId: userId
+          }
+        })
+        .then(res => {
+          this.balance = res.body.data.wallet.balance
+          this.cumulative = res.body.data.wallet.cumulative
+          console.log(res)
+        })
+      }
     },
     components: {
       Blur,
@@ -124,4 +156,6 @@
 .fix-blur{padding-top:200px;}
 .fix-blur .head-bar{margin-top:-200px;}
 .head-bar a{font-size:1.2rem;color:#fff;padding:0;}
+.default .num{color:#444;font-size:1.6rem;}
+.default .text{color:#999;text-indent:1rem;}
 </style>

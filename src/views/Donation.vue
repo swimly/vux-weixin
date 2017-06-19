@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="row w h">
         <div class="col v-m t-c">
-          <h2>6874</h2>
+          <h2>{{balance}}</h2>
           <p>现有积分（分）</p>
         </div>
       </div>
@@ -42,8 +42,18 @@
     },
     data () {
       return {
-        height: ''
+        height: '',
+        balance: 0,
+        form: {
+          userId: '',
+          score: '',
+          target: '',
+          payPwd: ''
+        }
       }
+    },
+    created () {
+      this.balance = this.$localStorage.get('balance')
     },
     mounted () {
       this.height = document.querySelector('.content').clientHeight + 'px'

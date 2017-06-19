@@ -5,12 +5,12 @@
         <img src="static/img/face.jpg" alt="">
       </div>
       <group gutter="30px">
-        <x-input v-model="userInfo.userName" text-align="right">
+        <x-input v-model="form.userName" text-align="right">
           <span class="iconfont icon-user" slot="label"></span>
         </x-input>      
       </group>
       <group gutter="10px">
-        <datetime :title="birthIcon" placeholder="请选择出生日期" :min-year="1950" confirm-text="确认" cancel-text="取消" v-model="userInfo.birthday"></datetime>
+        <datetime :title="birthIcon" placeholder="请选择出生日期" :min-year="1950" confirm-text="确认" cancel-text="取消" v-model="form.birthday"></datetime>
       </group>
       <group gutter="10px">
         <cell class="sex">
@@ -18,17 +18,17 @@
           <ul slot="default" class="row w">
             <li class="col v-m">
               <div class="checkbox circle right">
-                <input type="radio" name="sex" value="0" id="s1" v-model="userInfo.userSex">
+                <input type="radio" name="sex" value="0" id="s1" v-model="form.userSex">
                 <span class="iconfont icon-dot"></span>
                 <label for="s1">保密</label>
               </div>
               <div class="checkbox circle right">
-                <input type="radio" name="sex" value="1" id="s2" v-model="userInfo.userSex">
+                <input type="radio" name="sex" value="1" id="s2" v-model="form.userSex">
                 <span class="iconfont icon-dot"></span>
                 <label for="s2">男</label>
               </div>
               <div class="checkbox circle right">
-                <input type="radio" name="sex" value="2" id="s3" v-model="userInfo.userSex">
+                <input type="radio" name="sex" value="2" id="s3" v-model="form.userSex">
                 <span class="iconfont icon-dot"></span>
                 <label for="s3">女</label>
               </div>
@@ -63,7 +63,12 @@
       }
     },
     created () {
-      this.userInfo = JSON.parse(this.$localStorage.get('userInfo'))
+      const user = JSON.parse(this.$localStorage.get('userInfo'))
+      console.log(user)
+      this.form.userId = user.userId
+      this.form.userName = user.userName
+      this.form.birthday = user.birthday
+      this.form.userSex = user.userSex
     },
     methods: {
       handleSubmit () {

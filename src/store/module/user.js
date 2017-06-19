@@ -141,6 +141,7 @@ const mutations = {
             state.userInfo = res.body.data.userInfo
             This.$localStorage.set('userInfo', JSON.stringify(state.userInfo))
             This.$localStorage.set('time', Date.parse(new Date()))
+            This.$localStorage.set('logined', true)
             setTimeout(() => {
               This.$router.replace('/')
             }, 1000)
@@ -237,6 +238,7 @@ const mutations = {
             state.userInfo = res.body.data.userInfo
             This.$localStorage.set('userInfo', JSON.stringify(state.userInfo))
             This.$localStorage.set('time', Date.parse(new Date()))
+            This.$localStorage.set('logined', true)
             setTimeout(() => {
               This.$router.replace('/')
             }, 1000)
@@ -331,13 +333,27 @@ const mutations = {
       url: information,
       jsonp: 'callback',
       jsonpCallback: 'json',
-      params: This.userInfo,
+      params: This.form,
       before: () => {
         This.loading = true
       }
     })
     .then(res => {
-      console.log(res)
+      let userInfo = JSON.parse(This.$localStorage.get('userInfo'))
+      if (res.body.status) {
+        userInfo.userName = This.form.userName
+        userInfo.birthday = This.form.birthday
+        userInfo.userSex = This.form.userSex
+        This.$localStorage.set('userInfo', JSON.stringify(userInfo))
+      }
+      This.loading = false
+      This.$vux.toast.show({
+        type: 'text',
+        width: '20em',
+        position: 'bottom',
+        text: res.body.msg,
+        time: '1000'
+      })
     })
   }
 }

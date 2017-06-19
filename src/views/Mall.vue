@@ -33,7 +33,7 @@
     <h2 class="title">新品推荐</h2>
     <ul class="grid goods-list">
       <li class="col col-12" v-for="(item, index) in products">
-        <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveInfo">
+        <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveData(item)">
           <span class="cover">
             <img v-lazy="item.listPic"/>
           </span>
@@ -85,10 +85,13 @@
       })
     },
     methods: {
-      handleSaveInfo () {},
       ...mapMutations({
         getProduct: 'getProduct'
-      })
+      }),
+      handleSaveData (item) {
+        console.log(item)
+        this.$localStorage.set('goods', JSON.stringify(item))
+      }
     },
     components: {
       Swiper,

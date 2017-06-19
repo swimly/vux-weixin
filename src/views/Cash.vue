@@ -4,8 +4,8 @@
       <scroller lock-x :height="height">
         <group gutter="0px">
           <cell title="积分余额" value-align="left">
-            <span class="c-red num v-m" style="padding-left:1rem;">3012</span>
-            <span class="summary v-m">（可提现（￥301.2元）</span>
+            <span class="c-red num v-m" style="padding-left:1rem;">{{balance}}</span>
+            <span class="summary v-m">（可提现（￥{{balance/10}}元）</span>
           </cell>
         </group>
         <group gutter="10px">
@@ -27,6 +27,7 @@
 </template>
 <script>
   import {XInput, Group, Cell, Scroller, XButton} from 'vux'
+  import {precard} from '../config'
   export default {
     head: {
       title: {
@@ -40,9 +41,35 @@
       Scroller,
       XButton
     },
+    created () {
+      this.balance = this.$localStorage.get('balance')
+      this.$http({
+        method: 'jsonp',
+        url: precard,
+        jsonp: 'callback',
+        jsonpCallback: 'json',
+        params: {
+          userId: JSON.parse(this.$localStorage.get('userInfo')).userId
+        },
+        before: () => {
+        }
+      })
+      .then(res => {
+        console.log(res)
+      })
+    },
     data () {
       return {
-        height: ''
+        height: '',
+        balance: 0,
+        form: {
+          userId: '',
+          score: '',
+          cardId: '',
+          bankName: '',
+          cardNo: '',
+          cardUser: ''
+        }
       }
     },
     mounted () {

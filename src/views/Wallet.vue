@@ -9,7 +9,16 @@
           <router-link to='/record'>提现记录</router-link>
         </li>
       </ul>
-      <score-item class="light"></score-item>
+      <div class="row w light">
+        <router-link to="/detail" class="col v-m col-12 t-c">
+          <h2 class="num">{{data.cumulative || 0}}</h2>
+          <p class="text">累计积分收入（分）</p>
+        </router-link>
+        <router-link to="/balanceDetail" class="col v-m col-12 t-c">
+          <h2 class="num">{{data.balance || 0}}</h2>
+          <p class="text">积分余额（分）</p>
+        </router-link>
+      </div>
     </div>
     <div class="h auto">
       <ul class='row w white'>
@@ -19,23 +28,24 @@
           </div>
         </li>
         <li class='col v-m col-14'>
-          <p class="legend yellow">已提现的积分：19000</p>
-          <p class="legend blue">可提现的积分：4000</p>
+          <p class="legend yellow">已提现的积分：{{use}}</p>
+          <p class="legend blue">可提现的积分：{{balance}}</p>
         </li>
       </ul>
     </div>
     <div class="btn-area row w" style="border:none;">
       <div class="col v-m">
-        <x-button type="warn" @click.native="jump('/cash')">立即提现</x-button>
-        <x-button plain type="primary" class="custom-primary-red" style="margin-top:10px;" @click.native="jump('/donation')">积分转增</x-button>
+        <x-button type="warn" @click.native="handleWithDraw(balance)">立即提现</x-button>
+        <x-button plain type="primary" class="custom-primary-red" style="margin-top:10px;" @click.native="handleDonation(balance)">积分转增</x-button>
       </div>
     </div>
   </div>
 </template>
 <script>
   import IEcharts from 'vue-echarts-v3/src/full.vue'
-  import ScoreItem from '@/components/ScoreItem'
   import {XButton} from 'vux'
+  import {wallet} from '../config'
+  import {mapGetters} from 'vuex'
   export default {
     head: {
       title: {
@@ -44,23 +54,23 @@
     },
     components: {
       IEcharts,
-      ScoreItem,
       XButton
     },
     data () {
       return {
         loading: true,
+        balance: 0,
+        cumulative: 0,
+        use: 0,
+        data: [],
         bar: {
-          tooltip: {},
           series: [{
-            name: '访问来源',
+            name: '积分',
             type: 'pie',
             radius: '70%',
             center: ['50%', '50%'],
-            data: [
-              {value: 335, name: '已提现的积分'},
-              {value: 210, name: '可提现的积分'}
-            ],
+            data: [],
+            minAngle: 10,
             itemStyle: {
               normal: {
                 label: {
@@ -78,11 +88,63 @@
         }
       }
     },
+    created () {
+      if (this.$localStorage.get('logined')) {
+        const userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+        this.$http({
+          method: 'jsonp',
+          url: wallet,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: {
+            userId: userId
+          }
+        })
+        .then(res => {
+          this.data = res.body.data.wallet
+          console.log(typeof this.data)
+          this.balance = res.body.data.wallet.balance
+          this.cumulative = res.body.data.wallet.cumulative
+          this.use = this.cumulative - this.balance
+          this.bar.series[0].data = [{
+            value: this.use,
+            name: '已提现的的积分'
+          }, {
+            value: this.balance,
+            name: '可提现的积分'
+          }]
+        })
+      } else {
+        this.$vux.toast.show({
+          type: 'text',
+          width: '20em',
+          position: 'bottom',
+          text: '您尚未登陆！',
+          time: '1000'
+        })
+        setTimeout(() => {
+          this.$router.push('/login')
+        }, 1000)
+      }
+    },
+    computed: {
+      ...mapGetters({
+        checkAuthor: 'checkAuthor'
+      })
+    },
     methods: {
       onReady (instance) {
         this.loading = !this.loading
       },
-      jump (url) {
+      handleWithDraw (balance) {
+        this.$localStorage.set('balance', balance)
+        this.jump('/cash')
+      },
+      handleDonation (balance) {
+        this.$localStorage.set('balance', balance)
+        this.jump('/donation')
+      },
+      jump (url, banlance) {
         this.$router.push(url)
       }
     }
@@ -100,4 +162,6 @@
 .legend:before{content:"";display:inline-block;width:0.8rem;height:0.8rem;border-radius:50%;margin-right:0.5rem;}
 .legend.yellow:before{background-color:#FDC800;}
 .legend.blue:before{background-color:#43B5E4;}
+.light .num{font-size:1.6rem;color:#fff;}
+.light .text{font-size:1rem;color:rgba(255,255,255,0.8);text-indent:1rem;}
 </style>

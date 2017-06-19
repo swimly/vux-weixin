@@ -12,9 +12,9 @@ import VueResource from 'vue-resource'
 import VueLocalStorage from 'vue-localstorage'
 Vue.use(VueLocalStorage)
 Vue.use(LoadingPlugin)
-
 FastClick.attach(document.body)
-
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 Vue.config.productionTip = false
 Vue.use(WechatPlugin)
 Vue.use(VueResource)

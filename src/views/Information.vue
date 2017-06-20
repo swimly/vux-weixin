@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-  import {XInput, Group, Datetime, XButton, Cell} from 'vux'
+  import {XInput, Group, Datetime, XButton, Cell, dateFormat} from 'vux'
   import {mapMutations} from 'vuex'
   export default {
     head: {
@@ -67,7 +67,7 @@
       console.log(user)
       this.form.userId = user.userId
       this.form.userName = user.userName
-      this.form.birthday = user.birthday
+      this.form.birthday = dateFormat(user.userBirthday).substr(0, 10)
       this.form.userSex = user.userSex
     },
     methods: {

@@ -30,7 +30,7 @@
 </template>
 <script>
   import {mapGetters, mapMutations} from 'vuex'
-  import {XButton, Group, Cell, XInput, dateFormat} from 'vux'
+  import {XButton, Group, Cell, XInput} from 'vux'
   export default {
     data () {
       return {
@@ -42,9 +42,7 @@
       }
     },
     created () {
-      // console.log(this.$wechat)
-      console.log(dateFormat(645116400000))
-      if (this.checkAuthor) {
+      if (this.$localStorage.get('logined') === 'true') {
         this.$router.replace('/offer')
       }
     },

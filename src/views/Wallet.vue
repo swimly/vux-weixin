@@ -69,7 +69,7 @@
             type: 'pie',
             radius: '70%',
             center: ['50%', '50%'],
-            data: [],
+            data: [0, 10],
             minAngle: 10,
             itemStyle: {
               normal: {
@@ -89,7 +89,7 @@
       }
     },
     created () {
-      if (this.$localStorage.get('logined')) {
+      if (this.$localStorage.get('logined') === 'true') {
         const userId = JSON.parse(this.$localStorage.get('userInfo')).userId
         this.$http({
           method: 'jsonp',

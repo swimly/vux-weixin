@@ -98,7 +98,8 @@
       })
     },
     created () {
-      if (this.$localStorage.get('logined')) {
+      console.log(this.$localStorage.get('logined') === 'true')
+      if (this.$localStorage.get('logined') === 'true') {
         const userId = JSON.parse(this.$localStorage.get('userInfo')).userId
         this.$http({
           method: 'jsonp',

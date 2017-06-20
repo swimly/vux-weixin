@@ -342,7 +342,7 @@ const mutations = {
       let userInfo = JSON.parse(This.$localStorage.get('userInfo'))
       if (res.body.status) {
         userInfo.userName = This.form.userName
-        userInfo.birthday = This.form.birthday
+        userInfo.userBirthday = This.form.birthday
         userInfo.userSex = This.form.userSex
         This.$localStorage.set('userInfo', JSON.stringify(userInfo))
       }

@@ -9,11 +9,11 @@
       </div>
     </div>
     <scroller style="top:15vh;bottom:0;">
-      <h2 class="title"><span class="iconfont icon-jilu"></span>收入记录</h2>
+      <h2 class="title"><span class="iconfont icon-jilu"></span>收支记录</h2>
       <group gutter="0px" v-for="(item, index) in list" :key="index">
         <cell>
           <ul class="row w">
-            <li class="col v-m col-4 t-c green">+{{item.score}}</li>
+            <li class="col v-m col-4 t-c " :class="item.type === 1 ? 'green' : ''" style="font-size:1.6rem;">{{item.stype ? '+' : '-'}}{{item.score}}</li>
             <li class="col v-m col-20">
               <p class="time">{{item.createTime}}</p>
               <p class="text">{{item.source.split(':')[0]}}</p>
@@ -75,7 +75,7 @@
   }
 </script>
 <style scoped>
-.green{font-size:1.6rem;color:#49BC2E;}
+.green{color:#49BC2E;}
 .time{font-size:1rem;color:#9D9D9D;}
 .text{font-size:1.1rem;line-height:1.8;color:#565656;}
 .fix-banner{padding-top:15vh;}

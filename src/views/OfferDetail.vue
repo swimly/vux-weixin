@@ -56,7 +56,7 @@
       // 获取保险公司信息
       this.company = JSON.parse(this.$localStorage.get('orderCompany'))
       console.log(this.company)
-      if (!this.checkAuthor) {
+      if (this.$localStorage.get('logined') !== 'true') {
         this.$vux.toast.show({
           type: 'text',
           width: '20em',

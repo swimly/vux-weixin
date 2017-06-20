@@ -10,7 +10,7 @@
         <router-link to="/detail" class="col v-m t-c c-6">
           <img class="v-m" v-lazy="'static/img/score.png'" alt=""/>
           <span class="v-m">积分：</span>
-          <span class="c-red v-m">1342</span>
+          <span class="c-red v-m">{{score}}</span>
         </router-link>
         <router-link to="/exchange" class="col v-m t-c c-6">
           <img class="v-m " v-lazy="'static/img/jilu.png'" alt=""/>
@@ -55,6 +55,7 @@
     },
     data () {
       return {
+        score: 0,
         recommend: [
           'static/img/banner1.png',
           'static/img/banner1.png',
@@ -77,6 +78,7 @@
     },
     created () {
       this.getProduct(this)
+      this.score = JSON.parse(this.$localStorage.get('userInfo')).userBalance
     },
     computed: {
       ...mapGetters({

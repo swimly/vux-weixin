@@ -1,13 +1,13 @@
 <template>
   <scroller class="page gray">
-    <group class="mt0">
+    <group class="mt0" v-if="login">
       <cell title="我的资料" link="/information"></cell>
       <cell title="修改支付密码" link="edit/passwordBypay"></cell>
       <cell title="修改登录密码" link="edit/passwordBylogin"></cell>
-      <cell title="更换绑定手机" link="edit/phone" value="18827078587"></cell>
+      <cell title="更换绑定手机" link="edit/phone" :value="tel"></cell>
     </group>
-    <group class="mt10">
-      <cell title="客服热线" link="hotline" value="4008 458 458"></cell>
+    <group :class="login ? 'mt10' : ''" gutter="0">
+      <cell title="客服热线" is-link value="4008 458 458" @click.native="handleCall('4008 458 458')"></cell>
       <cell title="常见问题" link="/question"></cell>
       <cell title="意见反馈" link="/feedback"></cell>
       <cell title="关于我们" link="/aboutUs"></cell>
@@ -25,6 +25,23 @@
     components: {
       Group,
       Cell
+    },
+    data () {
+      return {
+        login: false,
+        tel: ''
+      }
+    },
+    mounted () {
+      this.login = this.$localStorage.get('logined') === 'true'
+      if (this.login) {
+        this.tel = JSON.parse(this.$localStorage.get('userInfo')).userTel
+      }
+    },
+    methods: {
+      handleCall (tel) {
+        window.location.href = 'tel:' + tel
+      }
     }
   }
 </script>

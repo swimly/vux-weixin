@@ -16,6 +16,7 @@ export const precard = 'http://liuwbox.com/zzbao/app/user/precard.htm' // 上次
 export const message = 'http://liuwbox.com/zzbao/app/user/message.htm' // 我的消息
 export const question = 'http://liuwbox.com/zzbao/app/user/questiones.htm' // 常见问题
 export const exchangeLog = 'http://liuwbox.com/zzbao/app/shop/exchange/log.htm' // 兑换记录
+export const withdraw = 'http://liuwbox.com/zzbao/app/user/withdraw.htm' // 积分提现
 export const tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential'
 export const ticketUrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
 export const appId = 'wxabf1c20c98f9cf4c'

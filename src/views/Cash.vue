@@ -15,7 +15,7 @@
           <x-input title="收款人" placeholder="收款账号开户人姓名" novalidate :show-clear="false" placeholder-align="right" text-align="right" v-model="form.cardUser"></x-input>
           <x-input title="支付密码" placeholder="请输入支付密码" novalidate :show-clear="false" placeholder-align="right" type="password" text-align="right" v-model="form.payPwd"></x-input>
         </group>
-        <p class="text" v-if="!hasPayPwd">您的支付密码还未设置，{{hasPayPwd}}<router-link to="" class="c-red">立即设置</router-link></p>
+        <p class="text" v-if="!hasPayPwd">您的支付密码还未设置，<router-link to="" class="c-red">立即设置</router-link></p>
       </scroller>
     </div>
     <div class="btn-area w row" style="border:none;">

@@ -3,32 +3,30 @@
     <div class="banner">
       <div class="row w h">
         <div class="col v-m t-c">
-          <h2>6874</h2>
+          <h2>{{balance}}</h2>
           <p>现有积分（分）</p>
         </div>
       </div>
     </div>
     <div class="h content">
-      <scroller lock-x :height="height" bounce>
-        <h2 class="title"><span class="iconfont icon-jilu"></span>收入记录</h2>
-        <group gutter="0px">
-          <cell v-for="(item, index) in list" :key="index">
-            <ul class="row w">
-              <li class="col v-m col-4 t-c green">+{{item.score}}</li>
-              <li class="col v-m col-20">
-                <p class="time">{{item.time}}</p>
-                <p class="text">{{item.resource}}</p>
-              </li>
-            </ul>
-          </cell>
-        </group>
-      </scroller>
+      <h2 class="title"><span class="iconfont icon-jilu"></span>收入记录</h2>
+      <group gutter="0px">
+        <cell v-for="(item, index) in list" :key="index">
+          <ul class="row w">
+            <li class="col v-m col-4 t-c green">+{{item.score}}</li>
+            <li class="col v-m col-20">
+              <p class="time">{{item.createTime}}</p>
+              <p class="text">{{item.source.split(':')[0]}}</p>
+            </li>
+          </ul>
+        </cell>
+      </group>
     </div>
   </div>
 </template>
 <script>
-  import {Scroller, Group, Cell} from 'vux'
-  import {mapGetters} from 'vuex'
+  import {Scroller, Group, Cell, dateFormat} from 'vux'
+  import {detail} from '../config'
   export default {
     head: {
       title: {
@@ -42,17 +40,38 @@
     },
     data () {
       return {
-        height: ''
+        balance: 0,
+        form: {
+          userId: '',
+          type: 1,
+          limit: 10,
+          pageIndex: 0
+        },
+        list: []
       }
     },
-    computed: {
-      ...mapGetters({
-        list: 'getIncomeRecord'
-      })
-    },
     mounted () {
-      this.height = document.querySelector('.content').clientHeight + 'px'
-      console.log(this.height)
+      this.balance = this.$localStorage.get('balance')
+      this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+      this.getList()
+    },
+    methods: {
+      getList () {
+        this.$http({
+          method: 'jsonp',
+          url: detail,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: this.form
+        })
+        .then(res => {
+          console.log(res)
+          this.list = res.body.data.scoreList
+          for (const i in this.list) {
+            this.list[i].createTime = dateFormat(this.list[i].createTime)
+          }
+        })
+      }
     }
   }
 </script>
@@ -60,8 +79,8 @@
 .green{font-size:1.6rem;color:#49BC2E;}
 .time{font-size:1rem;color:#9D9D9D;}
 .text{font-size:1.1rem;line-height:1.8;color:#565656;}
-.fix-banner{padding-top:15vh;}
-.banner{height:15vh;margin-top:-15vh;background:#EB3D00;color:#fff;}
+.fix-banner{padding-top:15vh !important;}
+.banner{height:15vh !important;margin-top:-15vh !important;background:#EB3D00;color:#fff;}
 .banner p{font-size:1rem;color:rgba(255,255,255,0.8);}
 .title:before{display:none;}
 .title{padding:0.3rem 1rem;border-bottom:1px solid #ECECEC;margin-top:0;}

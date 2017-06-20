@@ -10,11 +10,11 @@
         </li>
       </ul>
       <div class="row w light">
-        <router-link to="/detail" class="col v-m col-12 t-c">
+        <router-link to="/detail" class="col v-m col-12 t-c" @click.native="handleSave(data.balance)">
           <h2 class="num">{{data.cumulative || 0}}</h2>
           <p class="text">累计积分收入（分）</p>
         </router-link>
-        <router-link to="/balanceDetail" class="col v-m col-12 t-c">
+        <router-link to="/balanceDetail" class="col v-m col-12 t-c" @click.native="handleSave(data.balance)">
           <h2 class="num">{{data.balance || 0}}</h2>
           <p class="text">积分余额（分）</p>
         </router-link>
@@ -146,6 +146,10 @@
       },
       jump (url, banlance) {
         this.$router.push(url)
+      },
+      handleSave (data) {
+        console.log(data)
+        this.$localStorage.set('balance', data)
       }
     }
   }

@@ -112,6 +112,7 @@
         .then(res => {
           this.balance = res.body.data.wallet.balance
           this.cumulative = res.body.data.wallet.cumulative
+          this.$localStorage.set('balance', this.balance)
           console.log(res)
         })
       }

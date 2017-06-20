@@ -1,36 +1,24 @@
 <template>
   <div class="page gray">
-    <Scroller :height="height" lock-x>
-      <cell is-link class="score-list" v-for="(item, index) in list" :key="index" :link="'/record/' + item.id">
+    <group gutter="0">
+      <cell is-link class="score-list" v-for="(item, index) in list" :key="index" :link="'/record/' + item.id" @click.native="handleSave(item)">
         <li class="row w">
           <span class="col v-m col-11 t-l">
-            <b class="price">-{{item.score}}元</b>
+            <b class="price">-{{item.money}}元</b>
             <i class="score">积分余额：{{item.balance}}分</i>
           </span>
           <span class="col v-m col-13 t-r">
-            <i class="score">{{item.time}}</i>
-            <i :class="'status ' + item.status">{{item.text}}</i>
+            <i class="score">{{item.createTime}}</i>
+            <i :class="'status ' + {'success': item.status === 1, 'error': item.status === 2}">{{item.note}}</i>
           </span>
         </li>
       </cell>
-      <!--<ul class="score-list">
-        <li class="row w" v-for="(item, index) in list">
-          <span class="col v-m col-11">
-            <b class="price">-{{item.score}}元</b>
-            <i class="score">积分余额：{{item.balance}}分</i>
-          </span>
-          <span class="col v-m col-13 t-r">
-            <i class="score">{{item.time}}</i>
-            <i :class="'status ' + item.status">{{item.text}}</i>
-          </span>
-        </li>
-      </ul>-->
-    </Scroller>
+    </group>
   </div>
 </template>
 <script>
-  import {mapGetters} from 'vuex'
-  import {Scroller, Cell} from 'vux'
+  import {Cell, dateFormat, Group} from 'vux'
+  import {withdrawlog} from '../config'
   export default {
     head: {
       title: {
@@ -39,21 +27,45 @@
     },
     data () {
       return {
-        height: '0px'
+        height: '0px',
+        list: [],
+        form: {
+          userId: '',
+          limit: 10,
+          pageIndex: 0
+        }
       }
     },
-    mounted () {
-      this.height = document.querySelector('.page').clientHeight + 'px'
-      console.log(this.height)
-    },
     components: {
-      Scroller,
-      Cell
+      Cell,
+      dateFormat,
+      Group
     },
-    computed: {
-      ...mapGetters({
-        list: 'getWalletScore'
-      })
+    created () {
+      this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+      this.getList()
+    },
+    methods: {
+      getList () {
+        this.$http({
+          method: 'jsonp',
+          url: withdrawlog,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: this.form
+        })
+        .then(res => {
+          console.log(res)
+          this.list = res.body.data.scoreList
+          for (const i in this.list) {
+            this.list[i].createTime = dateFormat(this.list[i].createTime)
+          }
+        })
+      },
+      handleSave (item) {
+        console.log(item)
+        this.$localStorage.set('record', JSON.stringify(item))
+      }
     }
   }
 </script>

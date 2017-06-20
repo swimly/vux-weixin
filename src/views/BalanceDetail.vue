@@ -15,8 +15,8 @@
           <ul class="row w">
             <li class="col v-m col-4 t-c green">+{{item.score}}</li>
             <li class="col v-m col-20">
-              <p class="time">{{item.time}}</p>
-              <p class="text">{{item.resource}}</p>
+              <p class="time">{{item.createTime}}</p>
+              <p class="text">{{item.source.split(':')[0]}}</p>
             </li>
           </ul>
         </cell>
@@ -25,8 +25,8 @@
   </div>
 </template>
 <script>
-  import {Group, Cell} from 'vux'
-  import {mapGetters} from 'vuex'
+  import {Group, Cell, dateFormat} from 'vux'
+  import {detail} from '../config'
   export default {
     head: {
       title: {
@@ -39,13 +39,38 @@
     },
     data () {
       return {
-        height: ''
+        balance: 0,
+        list: [],
+        form: {
+          userId: '',
+          type: 2,
+          limit: 10,
+          pageIndex: 0
+        }
       }
     },
-    computed: {
-      ...mapGetters({
-        list: 'getIncomeRecord'
-      })
+    mounted () {
+      this.balance = this.$localStorage.get('balance')
+      this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
+      this.getList()
+    },
+    methods: {
+      getList () {
+        this.$http({
+          method: 'jsonp',
+          url: detail,
+          jsonp: 'callback',
+          jsonpCallback: 'json',
+          params: this.form
+        })
+        .then(res => {
+          console.log(res)
+          this.list = res.body.data.scoreList
+          for (const i in this.list) {
+            this.list[i].createTime = dateFormat(this.list[i].createTime)
+          }
+        })
+      }
     }
   }
 </script>

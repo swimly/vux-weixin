@@ -1,24 +1,22 @@
 <template>
   <div class="page gray">
-    <scroller :height="height" lock-x>
-      <div class="row w">
-        <div class="col v-m t-c info">
-          <h2>-199.00</h2>
-          <p>提现（元）</p>
-        </div>
+    <div class="row w">
+      <div class="col v-m t-c info">
+        <h2>-{{info.money}}</h2>
+        <p>提现（元）</p>
       </div>
-      <group gutter="0px">
-        <cell title="开户银行" value="中国建设银行武汉支行"></cell>
-        <cell title="收款卡号" value="20171547854125"></cell>
-        <cell title="积分余额" value="15421"></cell>
-        <cell title="创建时间" value="2017-05-15 18：54"></cell>
-        <cell title="提现状态" value="审核中"></cell>
-      </group>
-    </scroller>
+    </div>
+    <group gutter="0px">
+      <cell title="开户银行" :value="info.bank_name"></cell>
+      <cell title="收款卡号" :value="info.card_num"></cell>
+      <cell title="积分余额" :value="info.balance"></cell>
+      <cell title="创建时间" :value="info.createTime"></cell>
+      <cell title="提现状态" :value="select(info.status)"></cell>
+    </group>
   </div>
 </template>
 <script>
-  import {Scroller, Group, Cell} from 'vux'
+  import {Group, Cell} from 'vux'
   export default {
     head: {
       title: {
@@ -26,17 +24,28 @@
       }
     },
     components: {
-      Scroller,
       Group,
       Cell
     },
     data () {
       return {
-        height: ''
+        info: {}
       }
     },
     mounted () {
-      this.height = document.querySelector('.page').clientHeight + 'px'
+      this.info = JSON.parse(this.$localStorage.get('record'))
+      console.log(this.info)
+    },
+    methods: {
+      select (num) {
+        if (num === 0) {
+          return '审核中'
+        } else if (num === 1) {
+          return '审核通过'
+        } else {
+          return '审核失败'
+        }
+      }
     }
   }
 </script>

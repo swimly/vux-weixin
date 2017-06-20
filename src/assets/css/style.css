@@ -105,9 +105,9 @@ img{border:none;vertical-align: top;}
 .goods-list{padding:0.5rem;}
 .goods-list .col{padding:0.5rem;}
 .goods{background:#fff;display:block;padding:0.5rem;}
-.goods .cover{display:inline-block;width:100%;text-align:center;height:10rem;background:#fff;}
+.goods .cover{display:inline-block;width:100%;text-align:center;background:#fff;}
 .goods .cover img{width:100%;height:100%;}
-.goods .name{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-size:1.1rem;color:#424242;}
+.goods .name{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-size:1.1rem;color:#424242;padding:0.5rem 0;}
 /*车险报价*/
 .safe-list > .row{border-bottom:1px solid #EBEBEB;position:relative;}
 .safe-list .img{width:5.5rem;height:5.5rem;display:inline-block;border:1px solid #E5E5E5;vertical-align: middle;}
@@ -178,13 +178,10 @@ input::-webkit-input-placeholder{font-size:1.2rem;}
   html{font-size:calc(3.9vw);}
 }
 
-img[lazy=loading] {
-  /*your style here*/
+/*img[lazy=loading] {
 }
 img[lazy=error] {
-  /*your style here*/
   background:#f00;
 }
 img[lazy=loaded] {
-  /*your style here*/
-}
+}*/

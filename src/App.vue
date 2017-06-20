@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="page">
-    <loading v-model="pageLoading"></loading>
+    <loading v-model="pageLoading">
+    </loading>
     <router-view></router-view>
   </div>
 </template>

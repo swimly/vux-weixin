@@ -20,12 +20,7 @@ Vue.use(WechatPlugin)
 Vue.use(VueResource)
 Vue.use(VueHead)
 Vue.use(ToastPlugin)
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: 'dist/error.png',
-  loading: 'static/img/loading.gif',
-  attempt: 1
-})
+Vue.use(VueLazyload)
 /* eslint-disable no-new */
 new Vue({
   router,

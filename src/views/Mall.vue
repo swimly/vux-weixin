@@ -8,12 +8,12 @@
     <div class="p-1 white sub-line">
       <div class="row w d-line fs-1">
         <router-link to="/detail" class="col v-m t-c c-6">
-          <img class="v-m" v-lazy="'static/img/score.png'" alt=""/>
+          <img class="v-m" style="width:2rem;" v-lazy="'static/img/score.png'" alt=""/>
           <span class="v-m">积分：</span>
           <span class="c-red v-m">{{score}}</span>
         </router-link>
         <router-link to="/exchange" class="col v-m t-c c-6">
-          <img class="v-m " v-lazy="'static/img/jilu.png'" alt=""/>
+          <img class="v-m " style="width:2rem;" v-lazy="'static/img/jilu.png'" alt=""/>
           <span class="v-m">兑换记录</span>
         </router-link>
       </div>
@@ -35,7 +35,7 @@
       <li class="col col-12" v-for="(item, index) in products">
         <router-link :to="'/goods/' + item.id" class="goods" @click.native="handleSaveData(item)">
           <span class="cover">
-            <img v-lazy="item.listPic"/>
+            <img v-lazy="{src: item.listPic, error: 'static/img/err1.png', loading: 'static/img/loading1.gif'}"/>
           </span>
           <b class="name">{{item.name}}</b>
           <span class="c-red">积分<b class="score">{{item.score}}</b></span>

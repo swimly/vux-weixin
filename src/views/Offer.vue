@@ -5,7 +5,7 @@
         <router-link :to="'/offer/' + item.id" :class="item.recommend ? 'row w rec' : 'row w'" v-for="(item, index) in list" :key="index" @click.native="handleSaveData(item)">
             <span class="col v-m col-8 t-c ptb-10">
               <span class="img">
-                <img v-lazy="item.listPic" alt=""/>
+                <img v-lazy="{src: item.listPic, error: 'static/img/err1.png', loading: 'static/img/loading2.gif'}" alt=""/>
               </span>
             </span>
             <span class="col v-m col-16">

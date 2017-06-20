@@ -2,7 +2,7 @@
   <div class="page gray has-footer">
     <div class="content">
       <div class="cover w">
-        <img style="height:25vh" class="w" v-lazy="company.banner" alt=""/>
+        <img style="height:25vh" class="w" v-lazy="{src: company.banner, error: 'static/img/err1.png', loading: 'static/img/loading3.gif'}" alt=""/>
       </div>
       <selectCity title="投保城市" value="value"></selectCity>
       <group gutter="0">
@@ -80,19 +80,21 @@
         if (!this.InsuranceArea) {
           this.$vux.toast.show({
             type: 'text',
-            width: '10em',
+            width: '15em',
             position: 'bottom',
             text: '请填写所在地区！',
             time: '1000'
           })
+          this.loading = false
         } else if (!this.$refs.license.valid || !this.$refs.name.valid || !this.$refs.tel.valid) {
           this.$vux.toast.show({
             type: 'text',
-            width: '10em',
+            width: '15em',
             position: 'bottom',
             text: '请如实填写以上信息！',
             time: '1000'
           })
+          this.loading = false
         } else {
           // 存储用户订单信息到localstorage
           this.$localStorage.set('orderUser', JSON.stringify({

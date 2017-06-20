@@ -1,6 +1,6 @@
 <template>
   <div class="page gray h">
-    <scroller :on-infinite="loadMore" ref="my_scroller">
+    <div class="h auto">
       <div class="safe-list white" v-if="list.length > 0">
         <router-link class="row w" :to="'/offer/' + item.id"  v-for="(item, index) in list" :key="index">
           <span class="col v-m col-9 t-l p-5">
@@ -17,18 +17,19 @@
           </span>
         </router-link>
       </div>
-    </scroller>
-    <div class="row w h" v-if="list.length === 0">
+    </div>
+    <!--<div class="row w h" v-if="list.length === 0">
       <div class="col v-m t-c tip">
         <x-img :src="'static/img/sorry.png'" alt=""></x-img>
         <p>没有兑换奖品记录哦！</p>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
   import {XImg} from 'vux'
   import {exchangeLog} from '../config'
+  import {Loadmore} from 'mint-ui'
   export default {
     head: {
       title: {
@@ -48,7 +49,8 @@
       }
     },
     components: {
-      XImg
+      XImg,
+      Loadmore
     },
     mounted () {
       this.form.userId = JSON.parse(this.$localStorage.get('userInfo')).userId
@@ -59,25 +61,6 @@
     created () {
     },
     methods: {
-      loadMore (done) {
-        if (this.bottom >= 30) {
-          setTimeout(() => {
-            done(true)
-          }, 1500)
-          return
-        }
-        setTimeout(() => {
-          let start = this.bottom + 1
-          console.log(start)
-          for (let i = start; i < start + this.form.limit; i++) {
-            this.list.push(i + ' - keep walking, be 2 with you.')
-          }
-          this.bottom = this.bottom + this.form.limit
-          setTimeout(() => {
-            done()
-          })
-        }, 1500)
-      },
       getData () {
         this.$http({
           method: 'jsonp',

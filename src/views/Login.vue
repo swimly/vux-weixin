@@ -32,6 +32,11 @@
   import {mapGetters, mapMutations} from 'vuex'
   import {XButton, Group, Cell, XInput} from 'vux'
   export default {
+    head: {
+      title: {
+        inner: '用户登录'
+      }
+    },
     data () {
       return {
         loading: false,

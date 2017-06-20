@@ -3,7 +3,7 @@
     <blur :blur-amount=20 :url="selectBlur()" class="head-bar">
       <ul class="row w h" style="position:relative;z-index:1;">
         <li class="col v-b col-16">
-          <img v-lazy="userInfo.userSex < 1 && userInfo.userSex !== 0 ? 'static/img/female.png' : 'static/img/male.png'" alt="" class="circle v-m" v-if="userInfo">
+          <img v-lazy="userInfo.userSex > 1 ? 'static/img/female.png' : 'static/img/male.png'" alt="" class="circle v-m" v-if="userInfo">
           <img v-lazy="'static/img/face.png'" alt="" class="circle v-m" v-if="!userInfo">
           <span class="v-m" v-if="userInfo">{{userInfo.userName}}</span>
           <router-link to="/login" v-if="!userInfo">登录/注册</router-link>
@@ -132,7 +132,11 @@
         if (!this.userInfo) {
           return 'static/img/blur.jpg'
         } else {
-          return 'static/img/blur1.jpg'
+          if (this.userInfo.userSex > 1) {
+            return 'static/img/blur2.jpg'
+          } else {
+            return 'static/img/blur1.jpg'
+          }
         }
       },
       handleLogout () {

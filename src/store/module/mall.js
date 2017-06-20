@@ -31,7 +31,6 @@ const mutations = {
       })
       .then(res => {
         state.productList = res.body.data.productList
-        console.log(res)
       })
     })
   }

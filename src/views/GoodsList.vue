@@ -27,7 +27,7 @@
     </div>
     <popup position="top" v-model="select" class="popUp">
       <group gutter="0">
-        <cell v-for="(item, index) in options" :title="item.name" is-link :link="'/mall/' + item.id" @click.native="handleSelect(item)"></cell>
+        <cell v-for="(item, index) in options" :key="index" :title="item.name" is-link :link="'/mall/' + item.id" @click.native="handleSelect(item)"></cell>
       </group>
     </popup>
   </div>
@@ -126,30 +126,42 @@
           console.log(0)
           this.select = true
         } else if (index === 1) {
+          this.product.timeOrder = 0
+          this.product.priceOrder = 0
           this.product.defaultOrder = 1
           this.getProduct(this)
         } else if (index === 2) {
+          this.product.defaultOrder = 0
+          this.product.priceOrder = 0
           if (this.product.timeOrder === 0) {
             this.product.timeOrder = 1
             this.bar[index].sort = true
-          } else {
-            this.product.timeOrder = 0
+          } else if (this.product.timeOrder === 1) {
+            this.product.timeOrder = 2
             this.bar[index].sort = false
+          } else if (this.product.timeOrder === 2) {
+            this.product.timeOrder = 1
+            this.bar[index].sort = true
           }
           this.getProduct(this)
         } else if (index === 3) {
+          this.product.defaultOrder = 0
+          this.product.timeOrder = 0
           if (this.product.priceOrder === 0) {
             this.product.priceOrder = 1
+            this.bar[index].sort = false
+          } else if (this.product.priceOrder === 1) {
+            this.product.priceOrder = 2
             this.bar[index].sort = true
-          } else {
-            this.product.priceOrder = 0
+          } else if (this.product.priceOrder === 2) {
+            this.product.priceOrder = 1
             this.bar[index].sort = false
           }
           this.getProduct(this)
         }
+        console.log(this.product)
       },
       handleSelect (item) {
-        console.log(item)
         this.option = item.name
         this.product.type = item.id
         this.select = false
